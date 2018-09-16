@@ -48,6 +48,7 @@ namespace CST227_Milestones
             int userRow = 0;
             int userCol = 0;
 
+            // Reveal the Grid to start the game
             this.RevealGrid();
             do
             {
@@ -57,42 +58,24 @@ namespace CST227_Milestones
                     // gets converted prior to accessing the array becuase if not, errors and confusion will ensue
                     int inputRow = 0;
                     int inputCol = 0;
+                    bool IsValidOnBoard;
                     do
                     {
-                        // users actual input...finally...just sayin, thats a lot of vairable layers.  Maybe i'll do something about that next week.
-                        string userRowInput = null;
-                        string userColInput = null;
-
-                        // Update the gameboard
-
-
                         Console.WriteLine("Input a cell.");
                         // Get row input
                         Console.Write("Row: ");
-                        userRowInput = Console.ReadLine();
+                        inputRow = GetUserInput();
                         // Get col input
                         Console.Write("Col: ");
-                        userColInput = Console.ReadLine();
+                        inputCol = GetUserInput();
 
-                        // determine if is an int by using TryParse.
-                        // If not set the input ints to -1 so it forces the loop to iterate
-                        if (!int.TryParse(userRowInput, out inputRow) || !int.TryParse(userColInput, out inputCol))
-                        {
-                            inputRow = inputCol = -1;
-                        }
-
-                        // check to see if user input is in bounds of the array
-                        if (inputRow < 1 || inputRow > board.GetLength(0) || inputCol < 1 || inputCol > board.GetLength(1))
-                        {
-                            Console.WriteLine("Sorry, your input is not on the board or is invalid.  \nPress a key to retry.");
-                            Console.ReadKey();
-                        }
+                        // Check to see if user input is in bounds of the array
+                        IsValidOnBoard = CheckBounds(inputRow, inputCol);
                     }
                     // keep 'doing' while row is > length of row or row is < 1 AND col is > length of col or col is < 1
-                    // Remember we are using human readable number base...not 0 base yet.  that changes when we read the array
-                    while (inputRow > board.GetLength(0) || inputRow < 1 && inputCol > board.GetLength(1) || inputCol < 1);
+                    while (IsValidOnBoard == false || inputRow < 0 || inputCol < 0);
 
-                    // adjust user input into 0 based notation <---SEE...I TOLD YOU!
+                    // adjust user input into 0 based notation
                     // on a side note.  This is a bit dangerous even though i am sure the logic precludes a 0 from 
                     // getting to this point, when debuging I had that happen.  Never underestimate the ingenuity of a human to 
                     // force an array out of bounds.  Maybe next week I'll look into a better way...
@@ -193,12 +176,33 @@ namespace CST227_Milestones
             }
         }
 
+        public int GetUserInput()
+        {
+            string input = Console.ReadLine();
+            if(int.TryParse(input,out int userInput))
+                return userInput;
+            else
+                return -1;
+        }
 
-        // Override the RevealGrid() method from Grid.
-        // (CW-jaa) TODO: Change to follow Milestone 2 Reveal Grid Criteria as follows:
-        // (CW-jaa) display a ? if a cell has not been visited
-        // (CW-jaa) if has been visited, display a ~ if no live neighbors and #  if more than 0
-        public override void RevealGrid()
+        public bool CheckBounds(int inputRow, int inputCol)
+        {
+            if (inputRow < 1 || inputRow > board.GetLength(0) || inputCol < 1 || inputCol > board.GetLength(1))
+            {
+                Console.WriteLine("Sorry, your input is not on the board or is invalid.  \nPress a key to retry.");
+                Console.ReadKey();
+                return false;
+            }
+            else
+                return true;
+        }
+
+
+    // Override the RevealGrid() method from Grid.
+    // (CW-jaa) TODO: Change to follow Milestone 2 Reveal Grid Criteria as follows:
+    // (CW-jaa) display a ? if a cell has not been visited
+    // (CW-jaa) if has been visited, display a ~ if no live neighbors and #  if more than 0
+    public override void RevealGrid()
         {
             Console.Clear();
             // Array Iterators i and k move through the array.            
