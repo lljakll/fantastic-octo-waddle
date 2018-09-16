@@ -122,7 +122,6 @@ namespace CST227_Milestones
                     else
                     {
                         Console.WriteLine("That cell has already been visited and there were {0} neighbors.", board[userRow, userCol].NumLiveNeighbors);
-                        Console.ReadKey();
                     }
                 }
                 catch (Exception ex)
@@ -197,8 +196,7 @@ namespace CST227_Milestones
         {
             if (inputRow < 1 || inputRow > board.GetLength(0) || inputCol < 1 || inputCol > board.GetLength(1))
             {
-                Console.WriteLine("Sorry, your input is not on the board or is invalid.  \nPress a key to retry.");
-                Console.ReadKey();
+                Console.WriteLine("Sorry, your input is not on the board or is invalid.  Try Again.");
                 return false;
             }
             else
