@@ -1,6 +1,6 @@
 ﻿// CST 227 - Enterprise Application Development II
 // Jackie A. Adair
-// T2 - Milestone 2
+// T3 - Milestone 3
 // This is my original work
 
 using System;
@@ -237,12 +237,13 @@ namespace CST227_Milestones
                 // if the cell has neighbors.  Back out of that recrusion iteration
                 return;
         }
+
     // Override the RevealGrid() method from Grid.
     public override void RevealGrid()
         {
             Console.Clear();
 
-            // add column ref system
+            // add column reference system
             for (int i = 0; i <= board.GetLength(1); i++)
             {
                 if (i == 0)
