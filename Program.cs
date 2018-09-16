@@ -7,7 +7,7 @@
 // Write a recursive definition for a given problem
 // MineSweeperGame.cs Lines 96, 210-239
 // Implement a recursive solution
-//
+// Program.cs Line 60, MineSweeperGame.cs Line 230
 // Coding Standards
 // Lines 1-4
 
@@ -21,9 +21,8 @@ namespace CST227_Milestones
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Play()
         {
-
             try
             {
                 // Declare Grid object
@@ -52,12 +51,23 @@ namespace CST227_Milestones
 
                 // start the game
                 myGame.PlayGame();
+
+                // Ask to play again
+                Console.WriteLine("Would you like to play again?");
+                string userChoice = Console.ReadLine();
+
+                if (userChoice == "y" || userChoice == "Y")
+                    Play();
             }
             catch(Exception ex)
             {
                 Console.WriteLine("There was an error: {0}", ex.Message);
             }
 
+        }
+        static void Main(string[] args)
+        {
+            Play();
         }
     }
 }
