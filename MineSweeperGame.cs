@@ -26,7 +26,6 @@ namespace CST227_Milestones
 
             // Populate the neighbor values
             this.PopulateNeighborValues();
-
         }
 
         // Implemente PlayGame() as follows:
@@ -78,7 +77,7 @@ namespace CST227_Milestones
                     // adjust user input into 0 based notation
                     // on a side note.  This is a bit dangerous even though i am sure the logic precludes a 0 from 
                     // getting to this point, when debuging I had that happen.  Never underestimate the ingenuity of a human to 
-                    // force an array out of bounds.  Maybe next week I'll look into a better way...
+                    // force an array out of bounds.
                     userRow = inputRow - 1;
                     userCol = inputCol - 1;
 
@@ -88,11 +87,20 @@ namespace CST227_Milestones
                     // check to see if cell has been visited
                     if (!board[userRow, userCol].HasBeenVisited)
                     {
-                        board[userRow, userCol].HasBeenVisited = true;
-
                         // if not live, display a message of what is in the cell and ask for a key
                         if (!board[userRow, userCol].IsLive)
                         {
+                            // if cell has no live neighbors, call the CheckForZeroLiveNeighbors method
+                            if (board[userRow, userCol].NumLiveNeighbors == 0)
+                            {
+                                CheckForZeroLiveNeighbors(userRow, userCol);
+                            }
+                            else
+                            {
+                                // mark the cell as having been visited since it bypassed the Check for live neighbors method
+                                board[userRow, userCol].HasBeenVisited = true;
+                            }
+
                             RevealGrid();
                             Console.WriteLine();
                             Console.Write("The cell at ");
@@ -176,6 +184,7 @@ namespace CST227_Milestones
             }
         }
 
+        // Get a valid user input
         public int GetUserInput()
         {
             string input = Console.ReadLine();
@@ -185,6 +194,7 @@ namespace CST227_Milestones
                 return -1;
         }
 
+        // Check the bounds of the user input to ensure it is withing the array
         public bool CheckBounds(int inputRow, int inputCol)
         {
             if (inputRow < 1 || inputRow > board.GetLength(0) || inputCol < 1 || inputCol > board.GetLength(1))
@@ -197,17 +207,62 @@ namespace CST227_Milestones
                 return true;
         }
 
+        public void CheckForZeroLiveNeighbors(int row, int col)
+        {
+            // set the HasBeenVisited Flag
+            board[row, col].HasBeenVisited = true;
 
+            // check for live neighbors.  If none, iterate through the neighbors to do the following:
+            if (board[row, col].NumLiveNeighbors == 0)
+            {
+                // iterate through each neighbor
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int k = -1; k < 2; k++)
+                    {
+                        // make sure to stay in bounds
+                        if (row + i >= 0 && row + i < board.GetLength(0) && col + k >= 0 && col + k < board.GetLength(1))
+                        {
+                            // if a neighbor has not been visited
+                            if (board[row + i, col + k].HasBeenVisited == false)
+                            {
+                                // recursively check that cell's neighbors...
+                                CheckForZeroLiveNeighbors(row + i, col + k);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+                // if the cell has neighbors.  Back out of that recrusion iteration
+                return;
+        }
     // Override the RevealGrid() method from Grid.
-    // (CW-jaa) TODO: Change to follow Milestone 2 Reveal Grid Criteria as follows:
-    // (CW-jaa) display a ? if a cell has not been visited
-    // (CW-jaa) if has been visited, display a ~ if no live neighbors and #  if more than 0
     public override void RevealGrid()
         {
             Console.Clear();
-            // Array Iterators i and k move through the array.            
+
+            // add column ref system
+            for (int i = 0; i <= board.GetLength(1); i++)
+            {
+                if (i == 0)
+                    Console.Write("  ");
+                else if (i < 10)
+                    Console.Write(" {0}", i);
+                else
+                    Console.Write("{0}", i);
+            }
+            Console.WriteLine();
+
+            // Array Iterators i and k move through the array.    
             for (int i = 0; i < board.GetLength(0); i++)
             {
+                // add row reference system
+                if(i < 9)
+                    Console.Write(" {0}", i + 1);
+                else
+                    Console.Write("{0}", i + 1);
+
                 for (int k = 0; k < board.GetLength(1); k++)
                 {
                     if (board[i, k].HasBeenVisited == true)
@@ -224,8 +279,8 @@ namespace CST227_Milestones
                         else
                         {
                             // Dispaly num of live neighbors
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write(" {0}", board[i, k].NumLiveNeighbors);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.ForegroundColor = ConsoleColor.Gray;

@@ -113,11 +113,8 @@ namespace CST227_Milestones
                         {
                             for (int nek = -1; nek < 2; nek++)
                             {
-                                // using error catching to prevent out of bounds from crashing the program
-                                // not very efficient, but the 8 if/else statements was just as bad.
-                                
-                                    // check to see if each cell around the active cell is live
-                                    // if it is, increment the tally variable
+                                // check to see if each cell around the active cell is live
+                                // if it is, increment the tally variable
                                 if(i+nei >=0 && i+nei < board.GetLength(0) && k+nek >=0 && k+nek < board.GetLength(1))
                                 {
                                     if (board[i + nei, k + nek].IsLive) { tmpVal++; }
@@ -136,11 +133,31 @@ namespace CST227_Milestones
         public virtual void RevealGrid()
         {
             Console.Clear();
+            // add column ref system
+            for (int i = 0; i <= board.GetLength(1); i++)
+            {
+                if (i == 0)
+                    Console.Write("  ");
+                else if (i < 10)
+                    Console.Write(" {0}", i);
+                else
+                    Console.Write("{0}", i);
+            }
+            Console.WriteLine();
+
+
             // Iterate through the board and display the value if
             // the cell is not live, and an asterik if it is
 
             for (int i = 0; i < board.GetLength(0); i++)
             {
+                // add row reference system
+                if (i < 9)
+                    Console.Write(" {0}", i + 1);
+                else
+                    Console.Write("{0}", i + 1);
+
+
                 for (int k = 0; k < board.GetLength(1); k++)
                 {
                     if (board[i, k].IsLive == true)
