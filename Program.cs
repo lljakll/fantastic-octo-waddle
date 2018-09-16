@@ -25,6 +25,7 @@ namespace CST227_Milestones
         {
             try
             {
+                Console.Clear();
                 // Declare Grid object
                 MineSweeperGame myGame;
 
