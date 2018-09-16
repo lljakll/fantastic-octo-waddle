@@ -168,8 +168,6 @@ namespace CST227_Milestones
                 Console.WriteLine();
                 Console.WriteLine("BOOOOMMMMM!!!!");
                 Console.WriteLine();
-                Console.WriteLine("You Exploded...\nPress a key.");
-                Console.ReadKey();
             }
             else if (gameState == 0)
             {

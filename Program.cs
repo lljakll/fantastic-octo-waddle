@@ -29,28 +29,32 @@ namespace CST227_Milestones
                 MineSweeperGame myGame;
 
                 // Get the size of the board.  Must be greater than 9
-                Console.WriteLine("Enter the Board Size (Must be 10-50). ");
+                Console.WriteLine("Enter Game Difficulty:\n1-Easy (10)\n2-Normal (20)\n3-Hard (30)");
 
                 // Check for valid input.
                 string input = Console.ReadLine();
-                bool isString = int.TryParse(input, out int boardSize);
+                int.TryParse(input, out int difficulty);
+                int boardSize = 0;
 
                 // Check for proper boardsize and instantiate the Grid object.
                 // change "boardSize > 3" to test the winner scenario.  Hint: it does work...
-                if (boardSize < 51 && boardSize > 9)
-                {
-                    myGame = new MineSweeperGame(boardSize);
-                }
+                if (difficulty == 1)
+                    boardSize = 10;
+                else if (difficulty == 2)
+                    boardSize = 20;
+                else if (difficulty == 3)
+                    boardSize = 30;
                 else
                 {
                     // if bad input, instantiate a 10x10 board.
-                    Console.WriteLine("Size must be at least 10 but no more than 50.  Generating a 10x10 board.  Press any key.");
+                    Console.WriteLine("Please Choose a number 1-3");
                     Console.ReadKey();
-                    myGame = new MineSweeperGame(10);
+                    Play();
                 }
+                    myGame = new MineSweeperGame(boardSize);
 
-                // start the game
-                myGame.PlayGame();
+                    // start the game
+                    myGame.PlayGame();
 
                 // Ask to play again
                 Console.WriteLine("Would you like to play again?");
