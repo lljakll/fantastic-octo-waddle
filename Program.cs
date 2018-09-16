@@ -61,7 +61,7 @@ namespace CST227_Milestones
                 Console.WriteLine("Would you like to play again?");
                 string userChoice = Console.ReadLine();
 
-                if (userChoice == "y" || userChoice == "Y")
+                if (userChoice.ToUpper() == "Y" || userChoice.ToUpper() == "YES")
                     Play();
             }
             catch(Exception ex)
