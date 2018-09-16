@@ -139,9 +139,9 @@ namespace CST227_Milestones
                 if (i == 0)
                     Console.Write("  ");
                 else if (i < 10)
-                    Console.Write(" {0}", i);
+                    Console.Write("  {0}", i);
                 else
-                    Console.Write("{0}", i);
+                    Console.Write(" {0}", i);
             }
             Console.WriteLine();
 
@@ -165,14 +165,14 @@ namespace CST227_Milestones
                         // if val is 9...asterisk
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(" *");
+                        Console.Write("  *");
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     else
                     {
                         // LiveNeighbor if the val is not 9
-                        Console.Write(" {0}", board[i, k].NumLiveNeighbors);
+                        Console.Write("  {0}", board[i, k].NumLiveNeighbors);
 
                         // Just to make sure the row/col were properly set.
                         //Console.Write(" {0},{1}", board[i, k].Row,board[i,k].Col);

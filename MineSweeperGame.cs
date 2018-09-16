@@ -249,9 +249,9 @@ namespace CST227_Milestones
                 if (i == 0)
                     Console.Write("  ");
                 else if (i < 10)
-                    Console.Write(" {0}", i);
+                    Console.Write("  {0}", i);
                 else
-                    Console.Write("{0}", i);
+                    Console.Write(" {0}", i);
             }
             Console.WriteLine();
 
@@ -273,7 +273,7 @@ namespace CST227_Milestones
                         {
                             Console.BackgroundColor = ConsoleColor.Blue;
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write(" {0}", "~");
+                            Console.Write("  {0}", "~");
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.ForegroundColor = ConsoleColor.Gray;
                         }
@@ -282,7 +282,7 @@ namespace CST227_Milestones
                             // Dispaly num of live neighbors
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write(" {0}", board[i, k].NumLiveNeighbors);
+                            Console.Write("  {0}", board[i, k].NumLiveNeighbors);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.ForegroundColor = ConsoleColor.Gray;
                         }
@@ -290,7 +290,7 @@ namespace CST227_Milestones
                     else
                     {
                         // display a '?' if the HasBeenVisited != true
-                        Console.Write(" {0}", "?");
+                        Console.Write("  {0}", "?");
                     }
                 }
                 Console.WriteLine();
