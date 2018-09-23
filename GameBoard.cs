@@ -32,29 +32,49 @@ namespace fantasticOctoWaddle
                     Controls.Add(gameGrid.board[row, col]);
 
                     // Click handler
-                    gameGrid.board[row, col].Click += GameBoard_Click;
+                    //gameGrid.board[row, col].Click += GameBoard_Click;
+                    //gameGrid.board[row, col].MouseClick += GameBoard_Click;
+                    gameGrid.board[row, col].MouseUp += GameBoard_Click;
                 }
             }           
         }
 
         // This is where the logic will go for the click next week.
-        private void GameBoard_Click(object sender, EventArgs e)
+        private void GameBoard_Click(object sender, MouseEventArgs e)
         {
             // The passed object is assigned
             Cell cell = (Cell)sender;
 
-            // if the Cell Object's text is not blank, increment it
+            // if the Cell Object's text is not blank, increment it on left click
+            // if it is 1, blank it, if it is > 1, decrement it on right click
             if(int.TryParse(cell.Text, out int counter))
             {
-                counter++;
+                switch (e.Button)
+                {
+                    case MouseButtons.Left:
+                        counter++;
+                        break;
+                    case MouseButtons.Right:
+                        if (counter > 1)
+                            counter--;
+                        else
+                            counter = 0;
+                        break;
+                }
             }
             else
             {
-                counter = 1;
+                if (e.Button == MouseButtons.Right)
+                    counter = 0;
+                else
+                    counter = 1;
             }
 
             // display the new text
-            cell.Text = counter.ToString();
+            if (counter > 0)
+                cell.Text = counter.ToString();
+            else
+                cell.Text = "";
         }
     }
 }
