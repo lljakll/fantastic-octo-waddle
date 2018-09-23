@@ -32,8 +32,6 @@ namespace fantasticOctoWaddle
                     Controls.Add(gameGrid.board[row, col]);
 
                     // Click handler
-                    //gameGrid.board[row, col].Click += GameBoard_Click;
-                    //gameGrid.board[row, col].MouseClick += GameBoard_Click;
                     gameGrid.board[row, col].MouseUp += GameBoard_Click;
                 }
             }           
