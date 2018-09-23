@@ -1,6 +1,6 @@
 ﻿namespace fantasticOctoWaddle
 {
-    partial class FormGameBoard
+    partial class GameBoard
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,18 @@
         {
             this.SuspendLayout();
             // 
-            // FormGameBoard
+            // GameBoard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(363, 349);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(272, 281);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FormGameBoard";
-            this.Text = "GameBoard";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "GameBoard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Game Board";
             this.ResumeLayout(false);
 
         }

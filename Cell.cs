@@ -9,13 +9,13 @@ namespace fantasticOctoWaddle
 {
     public class Cell : Button
     {
+
         public int Row { get; set; }
         public int Col { get; set; }
         public bool HasBeenVisited {get; set;}
         public bool IsLive { get; set; }
         public int NumLiveNeighbors { get; set; }
 
-        // Constructor
         public Cell()
         {
             Row = -1;

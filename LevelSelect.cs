@@ -22,6 +22,12 @@ namespace fantasticOctoWaddle
             this.Close();
         }
 
+        // Calls the GameBoard and passes the size of the board
+        // This form is the Application Form, so it is hidden.
+        // Currently, when the GameBoard Form is closed, the
+        // remainder of the code executes and closes this form.
+        // TODO: setup a playAgain dialog that will allow the player
+        // to play again if desired.
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
             int boardSize = 0;
@@ -33,7 +39,7 @@ namespace fantasticOctoWaddle
                 boardSize = 20;
 
             this.Hide();
-            FormGameBoard gameBoard = new FormGameBoard(boardSize);
+            GameBoard gameBoard = new GameBoard(boardSize);
             gameBoard.ShowDialog();
             this.Close();
         }
