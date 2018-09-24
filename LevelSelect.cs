@@ -31,6 +31,7 @@ namespace fantasticOctoWaddle
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
             int boardSize = 0;
+
             if (RadioButtonEasy.Checked)
                 boardSize = 10;
             else if (RadioButtonModerate.Checked)
@@ -41,6 +42,8 @@ namespace fantasticOctoWaddle
             this.Hide();
             GameBoard gameBoard = new GameBoard(boardSize);
             gameBoard.ShowDialog();
+
+            // this is here we will add the code for a new game question
             this.Close();
         }
     }
