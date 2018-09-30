@@ -80,29 +80,35 @@ namespace fantasticOctoWaddle
                     // code for flagging the unchecked cell and marking it as flagged
                     if (cell.IsFlagged)
                     {
+                        // if it is flagged, unflag it, clear the image, and mark cell as not visited
                         cell.BackgroundImage = null;
                         cell.IsFlagged = false;
                         cell.HasBeenVisited = false;
                     }
                     else
                     {
+                        // if it is not flagged, flag it, add the image, mark the visited flag and check the win condition.
                         cell.BackgroundImageLayout = ImageLayout.Stretch;
                         cell.BackgroundImage = fantastic_octo_waddle.Properties.Resources.mineSweeperFlag;
                         cell.IsFlagged = true;
                         cell.HasBeenVisited = true;
-                        CheckWinCondition();
                     }
+                    // checking win condition so if the last unvisited cell is flagged, the game doesnt stall.
+                    CheckWinCondition();
                     ShowBoard();
                     break;
                 }
         }
 
+        // Check the win condition and change gameMode as necessary
+        // win condition is all non live cells have been visited
         public void CheckWinCondition()
         {
             for (int row = 0; row < gameGrid.board.GetLength(0); row++)
             {
                 for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                 {
+                    // Checks all non live cells for visitation
                     if(gameGrid.board[row,col].IsLive == false && gameGrid.board[row,col].HasBeenVisited == false)
                     {
                         gameMode = 1;
@@ -143,16 +149,18 @@ namespace fantasticOctoWaddle
                 return;
         }
 
+        // stop the timer
         public void StopTimer()
         {
             GameTimer.Stop();
         }
 
+        // this method checks the gameMode (0=win, 1=still playing, 2=dead) and displays the grid accordingly
         public void ShowBoard()
         {
             switch (gameMode)
             {
-                case 0: // WinRAR
+                case 0: // WinRAR.  Stop the timer, and display all mines with flags.  give winning message
                     StopTimer();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
@@ -170,22 +178,24 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
-                    MessageBox.Show("YOU WIN! Time Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+                    MessageBox.Show("YOU WIN! \nClose the window to play again.\nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     break;
-                case 1: //  Still Alive
+
+                case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
                             Controls.Add(gameGrid.board[row, col]);
-                            if(gameGrid.board[row,col].HasBeenVisited == true && gameGrid.board[row,col].IsLive == false && gameGrid.board[row,col].IsFlagged == false)
+                            if(gameGrid.board[row,col].HasBeenVisited == true && gameGrid.board[row,col].IsLive == false && gameGrid.board[row,col].IsFlagged == false && gameGrid.board[row,col].NumLiveNeighbors > 0)
                             {
                                 gameGrid.board[row, col].Text = gameGrid.board[row, col].NumLiveNeighbors.ToString();
                             }
                         }
                     }
                             break;
-                case 2: // Dead
+
+                case 2: // Dead.  stop timer. Display all live cells with bomb icon, give dead message and time.
                     StopTimer();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++) 
                     {
@@ -203,7 +213,7 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
-                    MessageBox.Show("BOOM!  KER-POW!  KABLEWEY!  KA-BOOM!!!  YOU LOSE! Time Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+                    MessageBox.Show("BOOM!  YOU LOSE! \nClose this window to play again.\nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     break;
             }
 
