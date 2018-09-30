@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics;
 
 namespace fantasticOctoWaddle
 {
@@ -15,6 +15,9 @@ namespace fantasticOctoWaddle
     {
         // setting the passed boardsize integer as a property for future functionality
         public int BoardSize { get; set; }
+        private Stopwatch GameTimer = new Stopwatch();
+        private int gameMode = 0;
+        Grid gameGrid;
 
         public GameBoard( int size)
         {
@@ -22,9 +25,10 @@ namespace fantasticOctoWaddle
             BoardSize = size;
 
             // create a gameBoard
-            Grid gameGrid = new Grid(BoardSize);
+            gameGrid = new Grid(BoardSize);
             gameGrid.Activate();
             gameGrid.PopulateNeighborValues();
+            GameTimer.Start();
 
             // Iterate through the array
             for (int row = 0; row < size; row++)
@@ -56,7 +60,10 @@ namespace fantasticOctoWaddle
                     if (cell.IsLive)
                     {
                         // if cell is live, call Detonate() and GameOver(gameTimeElapsed)
-
+                        StopTimer();
+                        gameMode = 2;
+                        ShowBoard();
+                        MessageBox.Show("Game Over! Time Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     }
                     else
                     {
@@ -77,6 +84,36 @@ namespace fantasticOctoWaddle
                     }
                     break;
                 }
+        }
+        public void StopTimer()
+        {
+            GameTimer.Stop();
+        }
+
+        public void ShowBoard()
+        {
+            switch (gameMode)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    for (int row = 0; row < gameGrid.board.GetLength(0); row++) 
+                    {
+                        for(int col=0; col < gameGrid.board.GetLength(1); col++)
+                        {
+                            Controls.Add(gameGrid.board[row, col]);
+
+                            if (gameGrid.board[row, col].IsLive)
+                            {
+                                gameGrid.board[row, col].BackgroundImage = fantastic_octo_waddle.Properties.Resources.bomb;
+                            }
+                        }
+                    }
+                    break;
+            }
+
         }
     } 
 }

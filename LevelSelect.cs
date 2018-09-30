@@ -44,7 +44,7 @@ namespace fantasticOctoWaddle
             gameBoard.ShowDialog();
 
             // this is here we will add the code for a new game question
-            this.Close();
+            this.Show();
         }
     }
 }
