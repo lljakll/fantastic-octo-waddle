@@ -60,39 +60,62 @@ namespace fantasticOctoWaddle
                     if (cell.IsLive)
                     {
                         // if cell is live, stop timer, set game mode to 2, update display and show game over with time.
-                        StopTimer();
                         gameMode = 2;
-                        ShowBoard();
-                        MessageBox.Show("Game Over! Time Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     }
                     else
                     {
-                        // if cell is not live, update has been visited, set gameMode to 1, and update display
-                        gameMode = 1;
+                        // if cell is not live, update has been visited, check win condition, then set gameMode to 1, and update display
                         cell.HasBeenVisited = true;
-                        if (cell.NumLiveNeighbors == 0)   // if there are no live neighbors,
-                            Cascade(cell.Row, cell.Col);  // send this cell's row and col to the cascade method
-                        ShowBoard();
+                        CheckWinCondition();
+
+                        if (gameMode == 1)
+                        {
+                            if (cell.NumLiveNeighbors == 0)   // if there are no live neighbors,
+                                Cascade(cell.Row, cell.Col);  // send this cell's row and col to the cascade method
+                        }
                     }
-                        break;
+                    ShowBoard();
+                    break;
                     case MouseButtons.Right:
                     // code for flagging the unchecked cell and marking it as flagged
                     if (cell.IsFlagged)
                     {
                         cell.BackgroundImage = null;
                         cell.IsFlagged = false;
+                        cell.HasBeenVisited = false;
                     }
                     else
                     {
                         cell.BackgroundImage = fantastic_octo_waddle.Properties.Resources.mineSweeperFlag;
                         cell.IsFlagged = true;
+                        cell.HasBeenVisited = true;
+                        CheckWinCondition();
                     }
+                    ShowBoard();
                     break;
                 }
         }
+
+        public void CheckWinCondition()
+        {
+            for (int row = 0; row < gameGrid.board.GetLength(0); row++)
+            {
+                for (int col = 0; col < gameGrid.board.GetLength(1); col++)
+                {
+                    if(gameGrid.board[row,col].IsLive == false && gameGrid.board[row,col].HasBeenVisited == false)
+                    {
+                        gameMode = 1;
+                        return;
+                    }
+                }
+            }
+            gameMode = 0;
+        }
+
         // checks surrounding cells for cells with no live neighbors and set hasbeenvisited to true
         public void Cascade(int row, int col)
         {
+            gameGrid.board[row, col].HasBeenVisited = true;
             // check for live neighbors.  If none, iterate through the neighbors to do the following:
             if (gameGrid.board[row, col].NumLiveNeighbors == 0)
             {
@@ -129,18 +152,23 @@ namespace fantasticOctoWaddle
             switch (gameMode)
             {
                 case 0: // WinRAR
+                    StopTimer();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
                             Controls.Add(gameGrid.board[row, col]);
 
+                            // Unsubscribe from the GameBoard_Click event since you won.
+                            gameGrid.board[row, col].MouseUp -= GameBoard_Click;
+
                             if (gameGrid.board[row, col].IsLive)
                             {
-                                gameGrid.board[row, col].BackgroundImage = fantastic_octo_waddle.Properties.Resources.bomb;
+                                gameGrid.board[row, col].BackgroundImage = fantastic_octo_waddle.Properties.Resources.mineSweeperFlag;
                             }
                         }
                     }
+                    MessageBox.Show("YOU WIN! Time Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     break;
                 case 1: //  Still Alive
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
@@ -156,11 +184,15 @@ namespace fantasticOctoWaddle
                     }
                             break;
                 case 2: // Dead
+                    StopTimer();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++) 
                     {
                         for(int col=0; col < gameGrid.board.GetLength(1); col++)
                         {
                             Controls.Add(gameGrid.board[row, col]);
+
+                            // Unsubscribe from the GameBoard_Click event since you lost
+                            gameGrid.board[row, col].MouseUp -= GameBoard_Click;
 
                             if (gameGrid.board[row, col].IsLive)
                             {
@@ -168,6 +200,7 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    MessageBox.Show("BOOM!  KER-POW!  KABLEWEY!  KA-BOOM!!!  YOU LOSE! Time Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     break;
             }
 
