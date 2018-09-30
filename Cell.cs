@@ -15,6 +15,7 @@ namespace fantasticOctoWaddle
         public bool HasBeenVisited {get; set;}
         public bool IsLive { get; set; }
         public int NumLiveNeighbors { get; set; }
+        public bool IsFlagged { get; set; }
 
         public Cell()
         {
@@ -25,6 +26,7 @@ namespace fantasticOctoWaddle
             NumLiveNeighbors = 0;
             this.Width = 25;
             this.Height = 25;
+            IsFlagged = false;
         }
     }
 }

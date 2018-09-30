@@ -1,11 +1,10 @@
 ﻿// Jackie A. Adair
 // CST-227 Enterprise Application Development II
-// Topic 4 Milestone 4 
+// Topic 5 Milestone 5 
 // git clone -b Milestone-4 https://github.com/lljakll/fantastic-octo-waddle.git
 // This is my own work
+// TODO: make variables more descriptive
 
-// TODO: Add arrow key functionality to navigate.  Add hotkeys for flagging and selecting
-// TODO: Add menu bar to select new game, exit, difficulty level, show board, high scores
 
 
 using System;

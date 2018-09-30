@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace fantasticOctoWaddle
 {
     public partial class GameBoard : Form
@@ -22,6 +23,9 @@ namespace fantasticOctoWaddle
 
             // create a gameBoard
             Grid gameGrid = new Grid(BoardSize);
+            gameGrid.Activate();
+            gameGrid.PopulateNeighborValues();
+
             // Iterate through the array
             for (int row = 0; row < size; row++)
             {
@@ -37,42 +41,42 @@ namespace fantasticOctoWaddle
             }           
         }
 
-        // This is where the logic will go for the click next week.
+        // Logic for the mouse click event and checking the cells.  
+        // Actions after cells are checked follow the click event
         private void GameBoard_Click(object sender, MouseEventArgs e)
         {
+            
             // The passed object is assigned
             Cell cell = (Cell)sender;
 
-            // if the Cell Object's text is not blank, increment it on left click
-            // if it is 1, blank it, if it is > 1, decrement it on right click
-            if(int.TryParse(cell.Text, out int counter))
-            {
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
-                        counter++;
+                    // Code for checking isLive and responding to it appropriatley;
+                    if (cell.IsLive)
+                    {
+                        // if cell is live, call Detonate() and GameOver(gameTimeElapsed)
+
+                    }
+                    else
+                    {
+
+                    }
                         break;
                     case MouseButtons.Right:
-                        if (counter > 1)
-                            counter--;
-                        else
-                            counter = 0;
-                        break;
+                    // code for flagging the unchecked cell and marking it as flagged
+                    if (cell.IsFlagged)
+                    {
+                        cell.BackgroundImage = null;
+                        cell.IsFlagged = false;
+                    }
+                    else
+                    {
+                        cell.BackgroundImage = fantastic_octo_waddle.Properties.Resources.mineSweeperFlag;
+                        cell.IsFlagged = true;
+                    }
+                    break;
                 }
-            }
-            else
-            {
-                if (e.Button == MouseButtons.Right)
-                    counter = 0;
-                else
-                    counter = 1;
-            }
-
-            // display the new text
-            if (counter > 0)
-                cell.Text = counter.ToString();
-            else
-                cell.Text = "";
         }
-    }
+    } 
 }
