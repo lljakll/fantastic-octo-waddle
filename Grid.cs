@@ -31,6 +31,7 @@ namespace fantasticOctoWaddle
                     board[row, col].Font = new Font("Microsoft Sans Serif",6.5F);
                     board[row, col].Text = "";
                     board[row,col].Name = "R" + board[row, col].Row.ToString() + "C" + board[row, col].Col.ToString();
+                    board[row, col].ForeColor = System.Drawing.Color.Black;
 
                     // set each Cell Objects location
                     // Setting this now since we are already iterating through the array
@@ -47,7 +48,7 @@ namespace fantasticOctoWaddle
             Random rnd = new Random();
 
             // use this.length so it calc's 20% of ALL elements in 2d Array
-            for (int i = 0; i < .2 * board.Length; i++)
+            for (int i = 0; i < .012 * board.Length; i++)
             {
                 int rndRow = rnd.Next(0, board.GetLength(0));
                 int rndCol = rnd.Next(0, board.GetLength(1));

@@ -59,7 +59,7 @@ namespace fantasticOctoWaddle
                     // Code for checking isLive and responding to it appropriatley;
                     if (cell.IsLive)
                     {
-                        // if cell is live, call Detonate() and GameOver(gameTimeElapsed)
+                        // if cell is live, stop timer, set game mode to 2, update display and show game over with time.
                         StopTimer();
                         gameMode = 2;
                         ShowBoard();
@@ -67,7 +67,12 @@ namespace fantasticOctoWaddle
                     }
                     else
                     {
-
+                        // if cell is not live, update has been visited, set gameMode to 1, and update display
+                        gameMode = 1;
+                        cell.HasBeenVisited = true;
+                        if (cell.NumLiveNeighbors == 0)   // if there are no live neighbors,
+                            Cascade(cell.Row, cell.Col);  // send this cell's row and col to the cascade method
+                        ShowBoard();
                     }
                         break;
                     case MouseButtons.Right:
@@ -85,6 +90,35 @@ namespace fantasticOctoWaddle
                     break;
                 }
         }
+        // checks surrounding cells for cells with no live neighbors and set hasbeenvisited to true
+        public void Cascade(int row, int col)
+        {
+            // check for live neighbors.  If none, iterate through the neighbors to do the following:
+            if (gameGrid.board[row, col].NumLiveNeighbors == 0)
+            {
+                // iterate through each neighbor
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int k = -1; k < 2; k++)
+                    {
+                        // make sure to stay in bounds
+                        if (row + i >= 0 && row + i < gameGrid.board.GetLength(0) && col + k >= 0 && col + k < gameGrid.board.GetLength(1))
+                        {
+                            // if a neighbor has not been visited
+                            if (gameGrid.board[row + i, col + k].HasBeenVisited == false)
+                            {
+                                // recursively check that cell's neighbors...
+                                Cascade(row + i, col + k);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+                // if the cell has neighbors.  Back out of that recrusion iteration
+                return;
+        }
+
         public void StopTimer()
         {
             GameTimer.Stop();
@@ -94,11 +128,34 @@ namespace fantasticOctoWaddle
         {
             switch (gameMode)
             {
-                case 0:
+                case 0: // WinRAR
+                    for (int row = 0; row < gameGrid.board.GetLength(0); row++)
+                    {
+                        for (int col = 0; col < gameGrid.board.GetLength(1); col++)
+                        {
+                            Controls.Add(gameGrid.board[row, col]);
+
+                            if (gameGrid.board[row, col].IsLive)
+                            {
+                                gameGrid.board[row, col].BackgroundImage = fantastic_octo_waddle.Properties.Resources.bomb;
+                            }
+                        }
+                    }
                     break;
-                case 1:
-                    break;
-                case 2:
+                case 1: //  Still Alive
+                    for (int row = 0; row < gameGrid.board.GetLength(0); row++)
+                    {
+                        for (int col = 0; col < gameGrid.board.GetLength(1); col++)
+                        {
+                            Controls.Add(gameGrid.board[row, col]);
+                            if(gameGrid.board[row,col].HasBeenVisited == true && gameGrid.board[row,col].IsLive == false)
+                            {
+                                gameGrid.board[row, col].Text = gameGrid.board[row, col].NumLiveNeighbors.ToString();
+                            }
+                        }
+                    }
+                            break;
+                case 2: // Dead
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++) 
                     {
                         for(int col=0; col < gameGrid.board.GetLength(1); col++)
