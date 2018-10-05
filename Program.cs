@@ -1,10 +1,8 @@
 ﻿// Jackie A. Adair
 // CST-227 Enterprise Application Development II
-// Topic 5 Milestone 5 
-// git clone -b Milestone-4 https://github.com/lljakll/fantastic-octo-waddle.git
+// Topic 5 Milestone 6 
+// git clone -b Milestone-6 https://github.com/lljakll/fantastic-octo-waddle.git
 // This is my own work
-// TODO: make variables more descriptive
-
 
 
 using System;
