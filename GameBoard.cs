@@ -89,7 +89,7 @@ namespace fantasticOctoWaddle
                     {
                         // if it is not flagged, flag it, add the image, mark the visited flag and check the win condition.
                         cell.BackgroundImageLayout = ImageLayout.Stretch;
-                        cell.BackgroundImage = fantastic_octo_waddle.Properties.Resources.mineSweeperFlag;
+                        cell.BackgroundImage = fantasticOctoWaddle.Resources.mineSweeperFlag;
                         cell.IsFlagged = true;
                         cell.HasBeenVisited = true;
                     }
@@ -174,7 +174,7 @@ namespace fantasticOctoWaddle
                             if (gameGrid.board[row, col].IsLive)
                             {
                                 gameGrid.board[row, col].BackgroundImageLayout = ImageLayout.Stretch;
-                                gameGrid.board[row, col].BackgroundImage = fantastic_octo_waddle.Properties.Resources.mineSweeperFlag;
+                                gameGrid.board[row, col].BackgroundImage = fantasticOctoWaddle.Resources.mineSweeperFlag;
                             }
                         }
                     }
@@ -187,9 +187,11 @@ namespace fantasticOctoWaddle
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
                             Controls.Add(gameGrid.board[row, col]);
-                            if(gameGrid.board[row,col].HasBeenVisited == true && gameGrid.board[row,col].IsLive == false && gameGrid.board[row,col].IsFlagged == false && gameGrid.board[row,col].NumLiveNeighbors > 0)
+                            if(gameGrid.board[row,col].HasBeenVisited == true && gameGrid.board[row,col].IsLive == false && gameGrid.board[row,col].IsFlagged == false)
                             {
-                                gameGrid.board[row, col].Text = gameGrid.board[row, col].NumLiveNeighbors.ToString();
+                                gameGrid.board[row, col].BackColor = System.Drawing.Color.AliceBlue;
+                                if (gameGrid.board[row, col].NumLiveNeighbors > 0)
+                                    gameGrid.board[row, col].Text = gameGrid.board[row, col].NumLiveNeighbors.ToString();
                             }
                         }
                     }
@@ -209,7 +211,7 @@ namespace fantasticOctoWaddle
                             if (gameGrid.board[row, col].IsLive)
                             {
                                 gameGrid.board[row, col].BackgroundImageLayout = ImageLayout.Stretch;
-                                gameGrid.board[row, col].BackgroundImage = fantastic_octo_waddle.Properties.Resources.bomb;
+                                gameGrid.board[row, col].BackgroundImage = fantasticOctoWaddle.Resources.bomb;
                             }
                         }
                     }
