@@ -18,10 +18,24 @@ namespace fantasticOctoWaddle
         private Stopwatch GameTimer = new Stopwatch();
         private int gameMode = 0;
         Grid gameGrid;
+        PlayerStats Player;
+        Scores ScoreBrd;
 
-        public GameBoard( string PlayerName, int difficulty)
+        public GameBoard( string playerName, int difficulty)
         {
             InitializeComponent();
+
+            // Initialize the ScoreBoard Object
+            ScoreBrd = new Scores();
+
+            // Call method that reads scores into collection.  Might be useful in future
+            // revisions, but the assignment implicitly says to load them at the beginning
+            ScoreBrd.ReadScoresToCollection();
+
+            Player = new PlayerStats();
+            Player.PlayerName = playerName;
+            Player.PlayerLevel = difficulty;
+
             double percentActive = 0;
 
             switch (difficulty)
@@ -195,6 +209,16 @@ namespace fantasticOctoWaddle
                         }
                     }
                     MessageBox.Show("YOU WIN! \nClose the window to play again.\nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+                    Player.PlayerScore = GameTimer.Elapsed.Seconds;
+                    ScoreBrd.WriteScore(Player);
+
+                    // Re-Reading the scores into the collection so the current game will be
+                    // considered and displayed if it qualifies in the top 5.
+                    ScoreBrd.ReadScoresToCollection();
+                    ScoreBrd.PopulateTop5(Player.PlayerLevel);
+
+                    ScoreBrd.FormClosed += (o, e) => this.Close();
+                    ScoreBrd.ShowDialog();
                     break;
 
                 case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
@@ -232,6 +256,18 @@ namespace fantasticOctoWaddle
                         }
                     }
                     MessageBox.Show("BOOM!  YOU LOSE! \nClose this window to play again.\nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+
+                    // Test of function.  Remove when done.
+                    Player.PlayerScore = GameTimer.Elapsed.Seconds;
+                    ScoreBrd.WriteScore(Player);
+
+                    // Re-Reading the scores into the collection so the current game will be
+                    // considered and displayed if it qualifies in the top 5.
+                    ScoreBrd.ReadScoresToCollection();
+                    ScoreBrd.PopulateTop5(Player.PlayerLevel);
+
+                    ScoreBrd.FormClosed += (o, e) => this.Close();
+                    ScoreBrd.ShowDialog();
                     break;
             }
 

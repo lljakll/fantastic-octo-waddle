@@ -5,15 +5,15 @@ using System.Text;
 
 namespace fantasticOctoWaddle
 {
-    public class PlayerStats : IComparable
+    public class PlayerStats : IComparable<PlayerStats>
     {
         public String PlayerName { get; set; }
         public int PlayerScore { get; set; }
         public int PlayerLevel { get; set; }
 
-            public int CompareTo(object obj)
+            public int CompareTo(PlayerStats obj)
         {
-            throw new NotImplementedException();
+            return this.PlayerScore.CompareTo(obj.PlayerScore);
         }
     }
 }

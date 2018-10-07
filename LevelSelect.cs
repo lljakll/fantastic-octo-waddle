@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace fantasticOctoWaddle
 {
@@ -15,6 +16,7 @@ namespace fantasticOctoWaddle
         public LevelSelect()
         {
             InitializeComponent();
+
         }
 
         private void ButtonQuit_Click(object sender, EventArgs e)
@@ -48,11 +50,15 @@ namespace fantasticOctoWaddle
                 
 
             this.Hide();
+
             GameBoard gameBoard = new GameBoard(playerName, difficulty);
             gameBoard.ShowDialog();
 
-            // this is here we will add the code for a new game question
+            TextBoxPlayerName.Text = "";
+
             this.Show();
         }
+
+
     }
 }
