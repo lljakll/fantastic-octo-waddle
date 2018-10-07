@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelSelect));
             this.GroupBoxSelectLevel = new System.Windows.Forms.GroupBox();
             this.RadioButtonHard = new System.Windows.Forms.RadioButton();
             this.RadioButtonModerate = new System.Windows.Forms.RadioButton();
@@ -125,13 +126,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(490, 716);
-            this.ControlBox = false;
             this.Controls.Add(this.LabelEnterYourName);
             this.Controls.Add(this.TextBoxPlayerName);
             this.Controls.Add(this.ButtonQuit);
             this.Controls.Add(this.ButtonPlay);
             this.Controls.Add(this.GroupBoxSelectLevel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LevelSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Level";

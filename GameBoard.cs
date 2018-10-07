@@ -32,12 +32,14 @@ namespace fantasticOctoWaddle
             // revisions, but the assignment implicitly says to load them at the beginning
             ScoreBrd.ReadScoresToCollection();
 
+            // Instantiate the PlayerStats object for this game.  The score will be updated at win condition
             Player = new PlayerStats();
             Player.PlayerName = playerName;
             Player.PlayerLevel = difficulty;
 
             double percentActive = 0;
 
+            // Changed difficulty to board size and % active.
             switch (difficulty)
             {
                 case 1:
@@ -208,16 +210,22 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
-                    MessageBox.Show("YOU WIN! \nClose the window to play again.\nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+                    MessageBox.Show("YOU WIN! \nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     Player.PlayerScore = GameTimer.Elapsed.Seconds;
+
+                    // Write the player score to the data file and add to the scoreboard List<>
                     ScoreBrd.WriteScore(Player);
 
                     // Re-Reading the scores into the collection so the current game will be
                     // considered and displayed if it qualifies in the top 5.
                     ScoreBrd.ReadScoresToCollection();
+
+                    // calls populatetop5 method to give this game a chance to be in the top 5
                     ScoreBrd.PopulateTop5(Player.PlayerLevel);
 
+                    // Subscribing to the ScoreBrd close form event so this form closes too
                     ScoreBrd.FormClosed += (o, e) => this.Close();
+                    // shows the scoreboard
                     ScoreBrd.ShowDialog();
                     break;
 
@@ -255,18 +263,16 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
-                    MessageBox.Show("BOOM!  YOU LOSE! \nClose this window to play again.\nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+                    MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
 
-                    // Test of function.  Remove when done.
-                    Player.PlayerScore = GameTimer.Elapsed.Seconds;
-                    ScoreBrd.WriteScore(Player);
+                    // Populates top 5 and shows the scoreboard.
 
-                    // Re-Reading the scores into the collection so the current game will be
-                    // considered and displayed if it qualifies in the top 5.
-                    ScoreBrd.ReadScoresToCollection();
+                    // calls populatetop5 method to give this game a chance to be in the top 5
                     ScoreBrd.PopulateTop5(Player.PlayerLevel);
 
+                    // Subscribing to the ScoreBrd close form event so this form closes too
                     ScoreBrd.FormClosed += (o, e) => this.Close();
+                    // shows the scoreboard
                     ScoreBrd.ShowDialog();
                     break;
             }

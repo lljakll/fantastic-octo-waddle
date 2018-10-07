@@ -28,40 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LVTop5Scores = new System.Windows.Forms.ListView();
-            this.PlayerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PlayerScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scores));
             this.ButtonClose = new System.Windows.Forms.Button();
             this.TBDifficultyText = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.DGTop5Scores = new System.Windows.Forms.DataGridView();
+            this.PlayerName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PlayerScore1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DGTop5Scores)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LVTop5Scores
-            // 
-            this.LVTop5Scores.AutoArrange = false;
-            this.LVTop5Scores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.PlayerName,
-            this.PlayerScore});
-            this.LVTop5Scores.Location = new System.Drawing.Point(96, 96);
-            this.LVTop5Scores.Name = "LVTop5Scores";
-            this.LVTop5Scores.Size = new System.Drawing.Size(624, 360);
-            this.LVTop5Scores.TabIndex = 0;
-            this.LVTop5Scores.UseCompatibleStateImageBehavior = false;
-            this.LVTop5Scores.View = System.Windows.Forms.View.Details;
-            // 
-            // PlayerName
-            // 
-            this.PlayerName.Text = "Name";
-
-            // 
-            // PlayerScore
-            // 
-            this.PlayerScore.Text = "Score";
-
             // 
             // ButtonClose
             // 
-            this.ButtonClose.Location = new System.Drawing.Point(320, 504);
+            this.ButtonClose.Location = new System.Drawing.Point(264, 504);
             this.ButtonClose.Name = "ButtonClose";
             this.ButtonClose.Size = new System.Drawing.Size(176, 64);
             this.ButtonClose.TabIndex = 2;
@@ -73,45 +51,79 @@
             // 
             this.TBDifficultyText.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.TBDifficultyText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TBDifficultyText.Location = new System.Drawing.Point(408, 33);
+            this.TBDifficultyText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBDifficultyText.Location = new System.Drawing.Point(250, 24);
             this.TBDifficultyText.Name = "TBDifficultyText";
-            this.TBDifficultyText.Size = new System.Drawing.Size(204, 31);
+            this.TBDifficultyText.Size = new System.Drawing.Size(204, 46);
             this.TBDifficultyText.TabIndex = 3;
+            this.TBDifficultyText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label1
+            // DGTop5Scores
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(224, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 32);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Difficulty:";
+            this.DGTop5Scores.AllowUserToAddRows = false;
+            this.DGTop5Scores.AllowUserToDeleteRows = false;
+            this.DGTop5Scores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGTop5Scores.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGTop5Scores.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.DGTop5Scores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGTop5Scores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PlayerName1,
+            this.PlayerScore1});
+            this.DGTop5Scores.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.DGTop5Scores.Location = new System.Drawing.Point(40, 88);
+            this.DGTop5Scores.MultiSelect = false;
+            this.DGTop5Scores.Name = "DGTop5Scores";
+            this.DGTop5Scores.ReadOnly = true;
+            this.DGTop5Scores.RowTemplate.Height = 40;
+            this.DGTop5Scores.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DGTop5Scores.Size = new System.Drawing.Size(624, 352);
+            this.DGTop5Scores.TabIndex = 5;
+            // 
+            // PlayerName1
+            // 
+            this.PlayerName1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PlayerName1.FillWeight = 60F;
+            this.PlayerName1.HeaderText = "Name";
+            this.PlayerName1.Name = "PlayerName1";
+            this.PlayerName1.ReadOnly = true;
+            this.PlayerName1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PlayerScore1
+            // 
+            this.PlayerScore1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PlayerScore1.FillWeight = 40F;
+            this.PlayerScore1.HeaderText = "Score";
+            this.PlayerScore1.Name = "PlayerScore1";
+            this.PlayerScore1.ReadOnly = true;
+            this.PlayerScore1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Scores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 647);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(713, 629);
+            this.Controls.Add(this.DGTop5Scores);
             this.Controls.Add(this.TBDifficultyText);
             this.Controls.Add(this.ButtonClose);
-            this.Controls.Add(this.LVTop5Scores);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Scores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "ScoreBoard";
+            this.Text = "High Scores";
             this.Load += new System.EventHandler(this.Scores_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DGTop5Scores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView LVTop5Scores;
         private System.Windows.Forms.Button ButtonClose;
         private System.Windows.Forms.TextBox TBDifficultyText;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.ColumnHeader PlayerName;
-        public System.Windows.Forms.ColumnHeader PlayerScore;
+        private System.Windows.Forms.DataGridView DGTop5Scores;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlayerName1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlayerScore1;
     }
 }
