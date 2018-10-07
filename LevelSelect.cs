@@ -30,17 +30,25 @@ namespace fantasticOctoWaddle
         // to play again if desired.
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
-            int boardSize = 0;
+            string playerName = "";
+            int difficulty = 0;
 
             if (RadioButtonEasy.Checked)
-                boardSize = 10;
+                difficulty = 1;
             else if (RadioButtonModerate.Checked)
-                boardSize = 15;
+                difficulty = 2;
             else if (RadioButtonHard.Checked)
-                boardSize = 20;
+                difficulty = 3;
+
+
+            if (TextBoxPlayerName.Text == "")
+                playerName = "NoName";
+            else
+                playerName = TextBoxPlayerName.Text;
+                
 
             this.Hide();
-            GameBoard gameBoard = new GameBoard(boardSize);
+            GameBoard gameBoard = new GameBoard(playerName, difficulty);
             gameBoard.ShowDialog();
 
             // this is here we will add the code for a new game question

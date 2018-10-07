@@ -43,12 +43,12 @@ namespace fantasticOctoWaddle
         }
 
         // Activate 20% of the cells (toggle the live randomly)
-        public virtual void Activate()
+        public virtual void Activate(double percentActive)
         {
             Random rnd = new Random();
 
             // use this.length so it calc's 20% of ALL elements in 2d Array
-            for (int i = 0; i < .2 * board.Length; i++)
+            for (int i = 0; i < percentActive * board.Length; i++)
             {
                 int rndRow = rnd.Next(0, board.GetLength(0));
                 int rndCol = rnd.Next(0, board.GetLength(1));

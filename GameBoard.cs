@@ -19,21 +19,37 @@ namespace fantasticOctoWaddle
         private int gameMode = 0;
         Grid gameGrid;
 
-        public GameBoard( int size)
+        public GameBoard( string PlayerName, int difficulty)
         {
             InitializeComponent();
-            BoardSize = size;
+            double percentActive = 0;
+
+            switch (difficulty)
+            {
+                case 1:
+                    BoardSize = 10;
+                    percentActive = .15;
+                    break;
+                case 2:
+                    BoardSize = 15;
+                    percentActive = .25;
+                    break;
+                case 3:
+                    BoardSize = 20;
+                    percentActive = .4;
+                    break;
+            }
 
             // create a gameBoard
             gameGrid = new Grid(BoardSize);
-            gameGrid.Activate();
+            gameGrid.Activate(percentActive);
             gameGrid.PopulateNeighborValues();
             GameTimer.Start();
 
             // Iterate through the array
-            for (int row = 0; row < size; row++)
+            for (int row = 0; row < BoardSize; row++)
             {
-                for (int col = 0; col < size; col++)
+                for (int col = 0; col < BoardSize; col++)
                 {
                     // Add the Cell Objects individually to the board (Form) based
                     // on their location
