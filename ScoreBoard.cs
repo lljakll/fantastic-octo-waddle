@@ -114,9 +114,25 @@ namespace fantasticOctoWaddle
             foreach (PlayerStats i in Top5Players)
             {
                 // build the score
-                seconds = i.PlayerScore % 60;
-                minutes = i.PlayerScore / 60;
-                hours = i.PlayerScore / 3600;
+                if (i.PlayerScore < 60)
+                {
+                    seconds = i.PlayerScore;
+                    minutes = 0;
+                    hours = 0;
+                }
+                else if(i.PlayerScore >= 60 && i.PlayerScore < 3600)
+                {
+                    seconds = i.PlayerScore % 60;
+                    minutes = i.PlayerScore / 60;
+                    hours = 0;
+                }
+                else
+                {
+                    seconds = i.PlayerScore % 60;
+                    minutes = (i.PlayerScore/60) % 60;
+                    hours = i.PlayerScore / 3600;
+                }
+
                 scoreString = hours.ToString() + "h " + minutes.ToString() + "m " + seconds.ToString() + "s";
 
                 // Populate the listviewwitem with names and scores
