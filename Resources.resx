@@ -121,6 +121,12 @@
   <data name="bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>bomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bomb_AQB_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bomb_AQB_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mainFormBkgrnd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>mainFormBkgrnd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="mineSweeperFlag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>mineSweeperFlag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

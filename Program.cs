@@ -25,7 +25,7 @@ namespace fantasticOctoWaddle
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Call the LevelSelect Form to start the application
-            Application.Run(new LevelSelect());
+            Application.Run(new frmMain());
         }
     }
 }
