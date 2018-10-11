@@ -41,8 +41,6 @@ namespace fantasticOctoWaddle
         }
 
         private void ReturnValues() { 
-            //string playerName = "";
-            //int difficulty = 0;
 
             if (RadioButtonEasy.Checked)
                 Difficulty = 1;
@@ -51,7 +49,6 @@ namespace fantasticOctoWaddle
             else if (RadioButtonHard.Checked)
                 Difficulty = 3;
 
-
             if (TextBoxPlayerName.Text == "")
                 PlayerName = "NoName";
             else
@@ -59,15 +56,6 @@ namespace fantasticOctoWaddle
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-
-            //GameBoard gameBoard = new GameBoard(playerName, difficulty);
-            //gameBoard.ShowDialog();
-
-            //TextBoxPlayerName.Text = "";
-
-            //this.Show();
         }
-
-
     }
 }
