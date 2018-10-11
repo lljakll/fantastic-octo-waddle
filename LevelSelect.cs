@@ -13,46 +13,59 @@ namespace fantasticOctoWaddle
 {
     public partial class LevelSelect : Form
     {
+        public int Difficulty { get; set; }
+        public string PlayerName { get; set; }
+
         public LevelSelect()
         {
             InitializeComponent();
-
         }
 
         private void ButtonQuit_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
         
-        // Calls the gameboard, Hides itself, passes the playername and difficulty.  clears
-        // player name when unhidden after gameboard and scoreboard are closed.
+        private void TextBoxPlayerName_EnterKeyPress(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                ReturnValues();
+            }
+        }
+
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
-            string playerName = "";
-            int difficulty = 0;
+            ReturnValues();
+        }
+
+        private void ReturnValues() { 
+            //string playerName = "";
+            //int difficulty = 0;
 
             if (RadioButtonEasy.Checked)
-                difficulty = 1;
+                Difficulty = 1;
             else if (RadioButtonModerate.Checked)
-                difficulty = 2;
+                Difficulty = 2;
             else if (RadioButtonHard.Checked)
-                difficulty = 3;
+                Difficulty = 3;
 
 
             if (TextBoxPlayerName.Text == "")
-                playerName = "NoName";
+                PlayerName = "NoName";
             else
-                playerName = TextBoxPlayerName.Text;
-                
+                PlayerName = TextBoxPlayerName.Text;
 
-            this.Hide();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
 
-            GameBoard gameBoard = new GameBoard(playerName, difficulty);
-            gameBoard.ShowDialog();
+            //GameBoard gameBoard = new GameBoard(playerName, difficulty);
+            //gameBoard.ShowDialog();
 
-            TextBoxPlayerName.Text = "";
+            //TextBoxPlayerName.Text = "";
 
-            this.Show();
+            //this.Show();
         }
 
 

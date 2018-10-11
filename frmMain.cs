@@ -11,22 +11,20 @@ namespace fantasticOctoWaddle
 {
     public partial class frmMain : Form
     {
+        public int Difficulty { get; set; }
+        public string PlayerName { get; set; }
+
         public frmMain()
         {
             InitializeComponent();
         }
 
-        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FileToolStripExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void easyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewToolStripScoreboardEasy_Click(object sender, EventArgs e)
         {
             Scores dispScore = new Scores();
             dispScore.ReadScoresToCollection();
@@ -34,7 +32,7 @@ namespace fantasticOctoWaddle
             dispScore.ShowDialog();
         }
 
-        private void moderateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewToolStripScoreboardModerate_Click(object sender, EventArgs e)
         {
             Scores dispScore = new Scores();
             dispScore.ReadScoresToCollection();
@@ -42,12 +40,28 @@ namespace fantasticOctoWaddle
             dispScore.ShowDialog();
         }
 
-        private void hardToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewToolStripScoreboardHard_Click(object sender, EventArgs e)
         {
             Scores dispScore = new Scores();
             dispScore.ReadScoresToCollection();
             dispScore.PopulateTop5(3);
             dispScore.ShowDialog();
+        }
+
+        private void FileToolStripMenuNewGame_Click(object sender, EventArgs e)
+        {
+            using (var form = new LevelSelect())
+            {
+                var result = form.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    Difficulty = form.Difficulty;
+                    PlayerName = form.PlayerName;
+
+                    MessageBox.Show(Difficulty + PlayerName);
+                }
+            }
         }
     }
 }

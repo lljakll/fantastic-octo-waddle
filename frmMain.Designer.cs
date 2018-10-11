@@ -30,18 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.MenuStripMain = new System.Windows.Forms.MenuStrip();
-            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newGameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scoreboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moderateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.howToPlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileToolStripNewGame = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileToolStripExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewToolStripScoreboard = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewToolStripScoreboardEasy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewToolStripScoreboardModerate = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewToolStripScoreboardHard = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpToolStripMenuHowToPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpToolStripMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.HintToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,104 +49,104 @@
             // 
             this.MenuStripMain.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.MenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGameToolStripMenuItem,
-            this.viewToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.hintToolStripMenuItem});
+            this.FileToolStripMenu,
+            this.ViewToolStripMenu,
+            this.HelpToolStripMenu,
+            this.HintToolStripMenu});
             this.MenuStripMain.Location = new System.Drawing.Point(0, 0);
             this.MenuStripMain.Name = "MenuStripMain";
             this.MenuStripMain.Size = new System.Drawing.Size(841, 52);
             this.MenuStripMain.TabIndex = 0;
             this.MenuStripMain.Text = "menuStrip1";
             // 
-            // newGameToolStripMenuItem
+            // FileToolStripMenu
             // 
-            this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGameToolStripMenuItem1,
-            this.exitToolStripMenuItem});
-            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(75, 48);
-            this.newGameToolStripMenuItem.Text = "File";
-            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
+            this.FileToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileToolStripNewGame,
+            this.FileToolStripExit});
+            this.FileToolStripMenu.Name = "FileToolStripMenu";
+            this.FileToolStripMenu.Size = new System.Drawing.Size(75, 48);
+            this.FileToolStripMenu.Text = "File";
             // 
-            // newGameToolStripMenuItem1
+            // FileToolStripNewGame
             // 
-            this.newGameToolStripMenuItem1.Name = "newGameToolStripMenuItem1";
-            this.newGameToolStripMenuItem1.Size = new System.Drawing.Size(278, 46);
-            this.newGameToolStripMenuItem1.Text = "New Game";
+            this.FileToolStripNewGame.Name = "FileToolStripNewGame";
+            this.FileToolStripNewGame.Size = new System.Drawing.Size(396, 46);
+            this.FileToolStripNewGame.Text = "New Game";
+            this.FileToolStripNewGame.Click += new System.EventHandler(this.FileToolStripMenuNewGame_Click);
             // 
-            // exitToolStripMenuItem
+            // FileToolStripExit
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(278, 46);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.FileToolStripExit.Name = "FileToolStripExit";
+            this.FileToolStripExit.Size = new System.Drawing.Size(396, 46);
+            this.FileToolStripExit.Text = "Exit";
+            this.FileToolStripExit.Click += new System.EventHandler(this.FileToolStripExit_Click);
             // 
-            // viewToolStripMenuItem
+            // ViewToolStripMenu
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scoreboardToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(94, 48);
-            this.viewToolStripMenuItem.Text = "View";
+            this.ViewToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ViewToolStripScoreboard});
+            this.ViewToolStripMenu.Name = "ViewToolStripMenu";
+            this.ViewToolStripMenu.Size = new System.Drawing.Size(94, 48);
+            this.ViewToolStripMenu.Text = "View";
             // 
-            // scoreboardToolStripMenuItem
+            // ViewToolStripScoreboard
             // 
-            this.scoreboardToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.easyToolStripMenuItem,
-            this.moderateToolStripMenuItem,
-            this.hardToolStripMenuItem});
-            this.scoreboardToolStripMenuItem.Name = "scoreboardToolStripMenuItem";
-            this.scoreboardToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
-            this.scoreboardToolStripMenuItem.Text = "Scoreboard";
+            this.ViewToolStripScoreboard.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ViewToolStripScoreboardEasy,
+            this.ViewToolStripScoreboardModerate,
+            this.ViewToolStripScoreboardHard});
+            this.ViewToolStripScoreboard.Name = "ViewToolStripScoreboard";
+            this.ViewToolStripScoreboard.Size = new System.Drawing.Size(396, 46);
+            this.ViewToolStripScoreboard.Text = "Scoreboard";
             // 
-            // easyToolStripMenuItem
+            // ViewToolStripScoreboardEasy
             // 
-            this.easyToolStripMenuItem.Name = "easyToolStripMenuItem";
-            this.easyToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
-            this.easyToolStripMenuItem.Text = "Easy";
-            this.easyToolStripMenuItem.Click += new System.EventHandler(this.easyToolStripMenuItem_Click);
+            this.ViewToolStripScoreboardEasy.Name = "ViewToolStripScoreboardEasy";
+            this.ViewToolStripScoreboardEasy.Size = new System.Drawing.Size(396, 46);
+            this.ViewToolStripScoreboardEasy.Text = "Easy";
+            this.ViewToolStripScoreboardEasy.Click += new System.EventHandler(this.ViewToolStripScoreboardEasy_Click);
             // 
-            // moderateToolStripMenuItem
+            // ViewToolStripScoreboardModerate
             // 
-            this.moderateToolStripMenuItem.Name = "moderateToolStripMenuItem";
-            this.moderateToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
-            this.moderateToolStripMenuItem.Text = "Moderate";
-            this.moderateToolStripMenuItem.Click += new System.EventHandler(this.moderateToolStripMenuItem_Click);
+            this.ViewToolStripScoreboardModerate.Name = "ViewToolStripScoreboardModerate";
+            this.ViewToolStripScoreboardModerate.Size = new System.Drawing.Size(396, 46);
+            this.ViewToolStripScoreboardModerate.Text = "Moderate";
+            this.ViewToolStripScoreboardModerate.Click += new System.EventHandler(this.ViewToolStripScoreboardModerate_Click);
             // 
-            // hardToolStripMenuItem
+            // ViewToolStripScoreboardHard
             // 
-            this.hardToolStripMenuItem.Name = "hardToolStripMenuItem";
-            this.hardToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
-            this.hardToolStripMenuItem.Text = "Hard";
-            this.hardToolStripMenuItem.Click += new System.EventHandler(this.hardToolStripMenuItem_Click);
+            this.ViewToolStripScoreboardHard.Name = "ViewToolStripScoreboardHard";
+            this.ViewToolStripScoreboardHard.Size = new System.Drawing.Size(396, 46);
+            this.ViewToolStripScoreboardHard.Text = "Hard";
+            this.ViewToolStripScoreboardHard.Click += new System.EventHandler(this.ViewToolStripScoreboardHard_Click);
             // 
-            // helpToolStripMenuItem
+            // HelpToolStripMenu
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.howToPlayToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(92, 48);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.HelpToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HelpToolStripMenuHowToPlay,
+            this.HelpToolStripMenuAbout});
+            this.HelpToolStripMenu.Name = "HelpToolStripMenu";
+            this.HelpToolStripMenu.Size = new System.Drawing.Size(92, 48);
+            this.HelpToolStripMenu.Text = "Help";
             // 
-            // howToPlayToolStripMenuItem
+            // HelpToolStripMenuHowToPlay
             // 
-            this.howToPlayToolStripMenuItem.Name = "howToPlayToolStripMenuItem";
-            this.howToPlayToolStripMenuItem.Size = new System.Drawing.Size(294, 46);
-            this.howToPlayToolStripMenuItem.Text = "How To Play";
+            this.HelpToolStripMenuHowToPlay.Name = "HelpToolStripMenuHowToPlay";
+            this.HelpToolStripMenuHowToPlay.Size = new System.Drawing.Size(396, 46);
+            this.HelpToolStripMenuHowToPlay.Text = "How To Play";
             // 
-            // aboutToolStripMenuItem
+            // HelpToolStripMenuAbout
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(294, 46);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.HelpToolStripMenuAbout.Name = "HelpToolStripMenuAbout";
+            this.HelpToolStripMenuAbout.Size = new System.Drawing.Size(396, 46);
+            this.HelpToolStripMenuAbout.Text = "About";
             // 
-            // hintToolStripMenuItem
+            // HintToolStripMenu
             // 
-            this.hintToolStripMenuItem.Name = "hintToolStripMenuItem";
-            this.hintToolStripMenuItem.Size = new System.Drawing.Size(85, 48);
-            this.hintToolStripMenuItem.Text = "Hint";
+            this.HintToolStripMenu.Name = "HintToolStripMenu";
+            this.HintToolStripMenu.Size = new System.Drawing.Size(85, 48);
+            this.HintToolStripMenu.Text = "Hint";
             // 
             // frmMain
             // 
@@ -174,17 +174,17 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip MenuStripMain;
-        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scoreboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem howToPlayToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hintToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem easyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem moderateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem FileToolStripNewGame;
+        private System.Windows.Forms.ToolStripMenuItem FileToolStripExit;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripScoreboard;
+        private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuHowToPlay;
+        private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuAbout;
+        private System.Windows.Forms.ToolStripMenuItem HintToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripScoreboardEasy;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripScoreboardModerate;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripScoreboardHard;
     }
 }

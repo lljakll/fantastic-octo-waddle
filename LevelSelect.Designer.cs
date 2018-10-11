@@ -34,7 +34,7 @@
             this.RadioButtonModerate = new System.Windows.Forms.RadioButton();
             this.RadioButtonEasy = new System.Windows.Forms.RadioButton();
             this.ButtonPlay = new System.Windows.Forms.Button();
-            this.ButtonQuit = new System.Windows.Forms.Button();
+            this.ButtonCancel = new System.Windows.Forms.Button();
             this.TextBoxPlayerName = new System.Windows.Forms.TextBox();
             this.LabelEnterYourName = new System.Windows.Forms.Label();
             this.GroupBoxSelectLevel.SuspendLayout();
@@ -95,15 +95,16 @@
             this.ButtonPlay.UseVisualStyleBackColor = true;
             this.ButtonPlay.Click += new System.EventHandler(this.ButtonPlay_Click);
             // 
-            // ButtonQuit
+            // ButtonCancel
             // 
-            this.ButtonQuit.Location = new System.Drawing.Point(40, 576);
-            this.ButtonQuit.Name = "ButtonQuit";
-            this.ButtonQuit.Size = new System.Drawing.Size(152, 64);
-            this.ButtonQuit.TabIndex = 2;
-            this.ButtonQuit.Text = "Quit";
-            this.ButtonQuit.UseVisualStyleBackColor = true;
-            this.ButtonQuit.Click += new System.EventHandler(this.ButtonQuit_Click);
+            this.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ButtonCancel.Location = new System.Drawing.Point(40, 576);
+            this.ButtonCancel.Name = "ButtonCancel";
+            this.ButtonCancel.Size = new System.Drawing.Size(152, 64);
+            this.ButtonCancel.TabIndex = 2;
+            this.ButtonCancel.Text = "Cancel";
+            this.ButtonCancel.UseVisualStyleBackColor = true;
+            this.ButtonCancel.Click += new System.EventHandler(this.ButtonQuit_Click);
             // 
             // TextBoxPlayerName
             // 
@@ -111,6 +112,7 @@
             this.TextBoxPlayerName.Name = "TextBoxPlayerName";
             this.TextBoxPlayerName.Size = new System.Drawing.Size(400, 38);
             this.TextBoxPlayerName.TabIndex = 3;
+            this.TextBoxPlayerName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxPlayerName_EnterKeyPress);
             // 
             // LabelEnterYourName
             // 
@@ -125,10 +127,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.ButtonCancel;
             this.ClientSize = new System.Drawing.Size(490, 716);
             this.Controls.Add(this.LabelEnterYourName);
             this.Controls.Add(this.TextBoxPlayerName);
-            this.Controls.Add(this.ButtonQuit);
+            this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonPlay);
             this.Controls.Add(this.GroupBoxSelectLevel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -152,7 +155,7 @@
         private System.Windows.Forms.RadioButton RadioButtonModerate;
         private System.Windows.Forms.RadioButton RadioButtonEasy;
         private System.Windows.Forms.Button ButtonPlay;
-        private System.Windows.Forms.Button ButtonQuit;
+        private System.Windows.Forms.Button ButtonCancel;
         private System.Windows.Forms.TextBox TextBoxPlayerName;
         private System.Windows.Forms.Label LabelEnterYourName;
     }
