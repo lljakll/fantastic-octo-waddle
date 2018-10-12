@@ -167,6 +167,9 @@ namespace fantasticOctoWaddle
             switch (e.Button)
             {
                 case MouseButtons.Left:
+                    // unsubscribe from Left click event
+                    cell.MouseUp -= GameBoard_Click;
+
                     // Code for checking isLive and responding to it appropriatley;
                     if (cell.IsLive)
                     {
@@ -175,7 +178,8 @@ namespace fantasticOctoWaddle
                     }
                     else
                     {
-                        // if cell is not live, update has been visited, check win condition, then set gameMode to 1, and update display
+                        // if cell is not live, update has been visited, 
+                        // check win condition, then set gameMode to 1, and update display
                         cell.HasBeenVisited = true;
                         CheckWinCondition();
 
@@ -188,17 +192,19 @@ namespace fantasticOctoWaddle
                     ShowBoard();
                     break;
                 case MouseButtons.Right:
+
                     // code for flagging the unchecked cell and marking it as flagged
                     if (cell.IsFlagged)
                     {
-                        // if it is flagged, unflag it, clear the image, and mark cell as not visited
+                        // if it is flagged, unflag it, clear the image, mark cell as not visited, resubscribe to mouse click event
                         cell.BackgroundImage = null;
                         cell.IsFlagged = false;
                         cell.HasBeenVisited = false;
                     }
                     else
                     {
-                        // if it is not flagged, flag it, add the image, mark the visited flag and check the win condition.
+                        // if it is not flagged, flag it, add the image, mark the visited flag,
+                        // and check the win condition.
                         cell.BackgroundImageLayout = ImageLayout.Stretch;
                         cell.BackgroundImage = fantasticOctoWaddle.Resources.mineSweeperFlag;
                         cell.IsFlagged = true;
@@ -235,6 +241,8 @@ namespace fantasticOctoWaddle
         public void Cascade(int row, int col)
         {
             gameGrid.board[row, col].HasBeenVisited = true;
+            // unsubscribe from Left click event
+            gameGrid.board[row, col].MouseUp -= GameBoard_Click;
             // check for live neighbors.  If none, iterate through the neighbors to do the following:
             if (gameGrid.board[row, col].NumLiveNeighbors == 0)
             {
