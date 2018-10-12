@@ -281,6 +281,7 @@ namespace fantasticOctoWaddle
             {
                 case 0: // WinRAR.  Stop the timer, and display all mines with flags.  give winning message
                     StopTimer();
+                    DoubleBuffered = true;
                     SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
@@ -320,6 +321,7 @@ namespace fantasticOctoWaddle
                     break;
 
                 case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
+                    DoubleBuffered = true;
                     SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
