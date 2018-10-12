@@ -35,7 +35,8 @@ namespace fantasticOctoWaddle
 
                     // set each Cell Objects location
                     // Setting this now since we are already iterating through the array
-                    board[row, col].Location = new Point(row * 25, col * 25);
+                    // Add 25 to the column to move it down and allow for the Menu Strip
+                    board[row, col].Location = new Point(row * 25, 25 + col * 25);
                 }
             }
 
