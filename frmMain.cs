@@ -15,6 +15,7 @@ namespace fantasticOctoWaddle
     {
         public int Difficulty { get; set; }
         public string PlayerName { get; set; }
+        public Size FormSize { get; set; }
 
         public int BoardSize { get; set; }
         private Stopwatch GameTimer = new Stopwatch();
@@ -27,6 +28,8 @@ namespace fantasticOctoWaddle
         public frmMain()
         {
             InitializeComponent();
+            this.ClientSize = new System.Drawing.Size(350, 375);
+
 
         }
         private void FileToolStripMenuNewGame_Click(object sender, EventArgs e)
@@ -60,14 +63,20 @@ namespace fantasticOctoWaddle
                         case 1:
                             BoardSize = 10;
                             percentActive = .15;
+                            this.ClientSize = new System.Drawing.Size(255, 280);
+                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
                         case 2:
                             BoardSize = 15;
                             percentActive = .25;
+                            this.ClientSize = new System.Drawing.Size(380, 405);
+                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
                         case 3:
                             BoardSize = 20;
                             percentActive = .4;
+                            this.ClientSize = new System.Drawing.Size(505, 530);
+                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
                     }
 
@@ -252,6 +261,13 @@ namespace fantasticOctoWaddle
             GameTimer.Stop();
         }
 
+        public void ResetBoard()
+        {
+            this.ClientSize = new System.Drawing.Size(350, 375);
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
+            PanelGamePanel.Controls.Clear();
+        }
+
         // this method checks the gameMode (0=win, 1=still playing, 2=dead) and displays the grid accordingly
         public void ShowBoard()
         {
@@ -292,6 +308,7 @@ namespace fantasticOctoWaddle
                     //ScoreBrd.FormClosed += (o, e) => this.Close();
                     // shows the scoreboard
                     ScoreBrd.ShowDialog();
+                    ResetBoard();
                     break;
 
                 case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
@@ -339,6 +356,7 @@ namespace fantasticOctoWaddle
                     // ScoreBrd.FormClosed += (o, e) => this.Close();
                     // shows the scoreboard
                     ScoreBrd.ShowDialog();
+                    ResetBoard();
                     break;
             }
 
