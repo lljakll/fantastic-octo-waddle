@@ -90,6 +90,8 @@ namespace fantasticOctoWaddle
                     GameTimer.Start();
 
                     // Iterate through the array
+                    DoubleBuffered = true;
+                    SuspendLayout();
                     for (int row = 0; row < BoardSize; row++)
                     {
                         for (int col = 0; col < BoardSize; col++)
@@ -102,6 +104,7 @@ namespace fantasticOctoWaddle
                             gameGrid.board[row, col].MouseUp += GameBoard_Click;
                         }
                     }
+                    ResumeLayout();
                 }
             }
         }
@@ -278,6 +281,7 @@ namespace fantasticOctoWaddle
             {
                 case 0: // WinRAR.  Stop the timer, and display all mines with flags.  give winning message
                     StopTimer();
+                    SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
@@ -294,6 +298,7 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    ResumeLayout();
                     MessageBox.Show("YOU WIN! \nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
                     Player.PlayerScore = GameTimer.Elapsed.Seconds;
 
@@ -315,6 +320,7 @@ namespace fantasticOctoWaddle
                     break;
 
                 case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
+                    SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
@@ -328,10 +334,13 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    ResumeLayout();
                     break;
 
                 case 2: // Dead.  stop timer. Display all live cells with bomb icon, give dead message and time.
                     StopTimer();
+                    DoubleBuffered = true;
+                    SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
@@ -348,6 +357,7 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    ResumeLayout();
                     MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
 
                     // Populates top 5 and shows the scoreboard.
