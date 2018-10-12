@@ -61,18 +61,21 @@ namespace fantasticOctoWaddle
                     switch (Difficulty)
                     {
                         case 1:
+                            ResetBoard();
                             BoardSize = 10;
                             percentActive = .15;
                             this.ClientSize = new System.Drawing.Size(255, 280);
                             this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
                         case 2:
+                            ResetBoard();
                             BoardSize = 15;
                             percentActive = .25;
                             this.ClientSize = new System.Drawing.Size(380, 405);
                             this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
                         case 3:
+                            ResetBoard();
                             BoardSize = 20;
                             percentActive = .4;
                             this.ClientSize = new System.Drawing.Size(505, 530);
