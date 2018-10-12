@@ -84,7 +84,7 @@ namespace fantasticOctoWaddle
                         {
                             // Add the Cell Objects individually to the board (Form) based
                             // on their location
-                            Controls.Add(gameGrid.board[row, col]);
+                            PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
 
                             // Click handler
                             gameGrid.board[row, col].MouseUp += GameBoard_Click;
@@ -263,7 +263,7 @@ namespace fantasticOctoWaddle
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
-                            Controls.Add(gameGrid.board[row, col]);
+                            PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
 
                             // Unsubscribe from the GameBoard_Click event since you won.
                             gameGrid.board[row, col].MouseUp -= GameBoard_Click;
@@ -299,7 +299,7 @@ namespace fantasticOctoWaddle
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
-                            Controls.Add(gameGrid.board[row, col]);
+                            PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
                             if (gameGrid.board[row, col].HasBeenVisited == true && gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].IsFlagged == false)
                             {
                                 gameGrid.board[row, col].BackColor = System.Drawing.Color.AliceBlue;
@@ -316,7 +316,7 @@ namespace fantasticOctoWaddle
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
-                            Controls.Add(gameGrid.board[row, col]);
+                            PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
 
                             // Unsubscribe from the GameBoard_Click event since you lost
                             gameGrid.board[row, col].MouseUp -= GameBoard_Click;
