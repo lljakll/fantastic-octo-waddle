@@ -154,6 +154,7 @@
             this.HelpToolStripHintShowTheBoard.Name = "HelpToolStripHintShowTheBoard";
             this.HelpToolStripHintShowTheBoard.Size = new System.Drawing.Size(348, 46);
             this.HelpToolStripHintShowTheBoard.Text = "Show The Board";
+            this.HelpToolStripHintShowTheBoard.Enabled = false;
             this.HelpToolStripHintShowTheBoard.Click += new System.EventHandler(this.HelpToolStripHintShowTheBoard_Click);
             // 
             // HelpToolStripHintShowACell
@@ -161,6 +162,7 @@
             this.HelpToolStripHintShowACell.Name = "HelpToolStripHintShowACell";
             this.HelpToolStripHintShowACell.Size = new System.Drawing.Size(348, 46);
             this.HelpToolStripHintShowACell.Text = "Show A Cell";
+            this.HelpToolStripHintShowACell.Enabled = false;
             this.HelpToolStripHintShowACell.Click += new System.EventHandler(this.HelpToolStripHintShowACell_Click);
             // 
             // HelpToolStripMenuAbout

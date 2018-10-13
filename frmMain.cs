@@ -59,6 +59,9 @@ namespace fantasticOctoWaddle
                     Player.PlayerLevel = Difficulty;
                     HintPenalty = 0;
 
+                    this.HelpToolStripHintShowACell.Enabled = true;
+                    this.HelpToolStripHintShowTheBoard.Enabled = true;
+
                     double percentActive = 0;
 
                     // Changed difficulty to board size and % active.
@@ -154,56 +157,42 @@ namespace fantasticOctoWaddle
 
         private void HelpToolStripHintShowACell_Click(object sender, EventArgs e)
         {
-            if (gameGrid == null || gameMode != 1)
+            DialogResult dialogResult = MessageBox.Show("Are you sure?  It will cost you 30 seconds.\nYour current score is: " + GameTimer.Elapsed.ToString("hh\\:mm\\:ss"), "Confirm", MessageBoxButtons.YesNo);
+            if(dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("There are no cells to reveal.  Start a New Game from the File menu");
-            }
-            else
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure?  It will cost you 30 seconds.\nYour current score is: " + GameTimer.Elapsed.ToString("hh\\:mm\\:ss"), "Confirm", MessageBoxButtons.YesNo);
-                if(dialogResult == DialogResult.Yes)
+                HintPenalty += 30;
+                int randCellRow = 0;
+                int randCellCol = 0;
+                Random rand = new Random();
+                do
                 {
-                    HintPenalty += 30;
-                    int randCellRow = 0;
-                    int randCellCol = 0;
-                    Random rand = new Random();
-                    do
-                    {
-                        randCellRow = rand.Next(gameGrid.board.GetLength(0) - 1);
-                        randCellCol = rand.Next(gameGrid.board.GetLength(1) - 1);
-                    }
-                    while (gameGrid.board[randCellRow, randCellCol].IsLive == true);
+                    randCellRow = rand.Next(gameGrid.board.GetLength(0) - 1);
+                    randCellCol = rand.Next(gameGrid.board.GetLength(1) - 1);
+                }
+                while (gameGrid.board[randCellRow, randCellCol].IsLive == true);
 
-                    MessageBox.Show("I will show you cell: " + randCellRow + ", " + randCellCol);
-                    gameGrid.board[randCellRow, randCellCol].Select();
+                MessageBox.Show("I will show you cell: " + randCellRow + ", " + randCellCol);
+                gameGrid.board[randCellRow, randCellCol].Select();
 
 
-                    gameGrid.board[randCellRow, randCellCol].HasBeenVisited = true;
+                gameGrid.board[randCellRow, randCellCol].HasBeenVisited = true;
 
 
                     
-                    if (gameMode == 1)
-                    {
-                        if (gameGrid.board[randCellRow, randCellCol].NumLiveNeighbors == 0)   // if there are no live neighbors,
-                            Cascade(randCellRow, randCellCol);  // send this cell's row and col to the cascade method
-                    }
-                    CheckWinCondition();
-                    ShowBoard();
+                if (gameMode == 1)
+                {
+                    if (gameGrid.board[randCellRow, randCellCol].NumLiveNeighbors == 0)   // if there are no live neighbors,
+                        Cascade(randCellRow, randCellCol);  // send this cell's row and col to the cascade method
                 }
+                CheckWinCondition();
+                ShowBoard();
             }
         }
 
         private void HelpToolStripHintShowTheBoard_Click(object sender, EventArgs e)
         {
-            if (gameGrid == null)
-            {
-                MessageBox.Show("There is no board to show you!");
-            }
-            else
-            {
-                gameMode = 2;
-                ShowBoard();
-            }
+            gameMode = 2;
+            ShowBoard();
         }
 
         private void GameBoard_Click(object sender, MouseEventArgs e)
@@ -354,6 +343,8 @@ namespace fantasticOctoWaddle
                         }
                     }
                     ResumeLayout();
+                    this.HelpToolStripHintShowACell.Enabled = false;
+                    this.HelpToolStripHintShowTheBoard.Enabled = false;
                     Player.PlayerScore = GameTimer.Elapsed.Seconds + HintPenalty;
                     MessageBox.Show("YOU WIN! \nTime Elapsed: " + Player.PlayerScore / 3600 + ":" + (Player.PlayerScore / 60) % 60 + ":" + Player.PlayerScore % 60);
 
@@ -414,6 +405,8 @@ namespace fantasticOctoWaddle
                         }
                     }
                     ResumeLayout();
+                    this.HelpToolStripHintShowACell.Enabled = false;
+                    this.HelpToolStripHintShowTheBoard.Enabled = false;
                     Player.PlayerScore = GameTimer.Elapsed.Seconds + HintPenalty;
                     MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + Player.PlayerScore/3600 + ":"+(Player.PlayerScore/60)%60 + ":" + Player.PlayerScore%60);
 
