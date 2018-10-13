@@ -34,6 +34,7 @@ namespace fantasticOctoWaddle
 
 
         }
+
         private void FileToolStripMenuNewGame_Click(object sender, EventArgs e)
         {
             using (var form = new LevelSelect())
@@ -246,7 +247,6 @@ namespace fantasticOctoWaddle
                         // if it is flagged, unflag it, clear the image, mark cell as not visited, resubscribe to mouse click event
                         cell.BackgroundImage = null;
                         cell.IsFlagged = false;
-                        cell.HasBeenVisited = false;
                     }
                     else
                     {
@@ -255,7 +255,6 @@ namespace fantasticOctoWaddle
                         cell.BackgroundImageLayout = ImageLayout.Stretch;
                         cell.BackgroundImage = fantasticOctoWaddle.Resources.mineSweeperFlag;
                         cell.IsFlagged = true;
-                        cell.HasBeenVisited = true;
                     }
                     // checking win condition so if the last unvisited cell is flagged, the game doesnt stall.
                     CheckWinCondition();
@@ -274,7 +273,7 @@ namespace fantasticOctoWaddle
                 for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                 {
                     // Checks all non live cells for visitation
-                    if (gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].HasBeenVisited == false)
+                    if (gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].HasBeenVisited == false || gameGrid.board[row,col].IsFlagged == true && gameGrid.board[row,col].IsFlagged == false)
                     {
                         gameMode = 1;
                         return;
