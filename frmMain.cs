@@ -70,7 +70,7 @@ namespace fantasticOctoWaddle
                         case 1:
                             ResetBoard();
                             BoardSize = 10;
-                            percentActive = .015;
+                            percentActive = .07;
                             this.ClientSize = new System.Drawing.Size(255, 280);
                             this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
@@ -176,9 +176,9 @@ namespace fantasticOctoWaddle
 
 
                 gameGrid.board[randCellRow, randCellCol].HasBeenVisited = true;
+                CheckWinCondition();
 
 
-                    
                 if (gameMode == 1)
                 {
                     if (gameGrid.board[randCellRow, randCellCol].NumLiveNeighbors == 0)   // if there are no live neighbors,
@@ -226,6 +226,7 @@ namespace fantasticOctoWaddle
                                 Cascade(cell.Row, cell.Col);  // send this cell's row and col to the cascade method
                         }
                     }
+                    CheckWinCondition();
                     ShowBoard();
                     break;
                 case MouseButtons.Right:
