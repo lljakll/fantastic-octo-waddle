@@ -16,13 +16,15 @@ namespace fantasticOctoWaddle
         public int Difficulty { get; set; }
         public string PlayerName { get; set; }
         public Size FormSize { get; set; }
+        public int HintPenalty { get; set; }
 
         public int BoardSize { get; set; }
         private Stopwatch GameTimer = new Stopwatch();
-        private int gameMode = 0;
+        private int gameMode = 1;
         Grid gameGrid;
         PlayerStats Player;
         Scores ScoreBrd;
+
 
 
         public frmMain()
@@ -54,6 +56,7 @@ namespace fantasticOctoWaddle
                     Player = new PlayerStats();
                     Player.PlayerName = PlayerName;
                     Player.PlayerLevel = Difficulty;
+                    HintPenalty = 0;
 
                     double percentActive = 0;
 
@@ -63,7 +66,7 @@ namespace fantasticOctoWaddle
                         case 1:
                             ResetBoard();
                             BoardSize = 10;
-                            percentActive = .15;
+                            percentActive = .015;
                             this.ClientSize = new System.Drawing.Size(255, 280);
                             this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
                             break;
@@ -150,12 +153,56 @@ namespace fantasticOctoWaddle
 
         private void HelpToolStripHintShowACell_Click(object sender, EventArgs e)
         {
+            if (gameGrid == null || gameMode != 1)
+            {
+                MessageBox.Show("There are no cells to reveal.  Start a New Game from the File menu");
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure?  It will cost you 30 seconds.\nYour current score is: " + GameTimer.Elapsed.ToString("hh\\:mm\\:ss"), "Confirm", MessageBoxButtons.YesNo);
+                if(dialogResult == DialogResult.Yes)
+                {
+                    HintPenalty += 30;
+                    int randCellRow = 0;
+                    int randCellCol = 0;
+                    Random rand = new Random();
+                    do
+                    {
+                        randCellRow = rand.Next(gameGrid.board.GetLength(0) - 1);
+                        randCellCol = rand.Next(gameGrid.board.GetLength(1) - 1);
+                    }
+                    while (gameGrid.board[randCellRow, randCellCol].IsLive == true);
 
+                    MessageBox.Show("I will show you cell: " + randCellRow + ", " + randCellCol);
+                    gameGrid.board[randCellRow, randCellCol].Select();
+
+
+                    gameGrid.board[randCellRow, randCellCol].HasBeenVisited = true;
+
+
+                    
+                    if (gameMode == 1)
+                    {
+                        if (gameGrid.board[randCellRow, randCellCol].NumLiveNeighbors == 0)   // if there are no live neighbors,
+                            Cascade(randCellRow, randCellCol);  // send this cell's row and col to the cascade method
+                    }
+                    CheckWinCondition();
+                    ShowBoard();
+                }
+            }
         }
 
         private void HelpToolStripHintShowTheBoard_Click(object sender, EventArgs e)
         {
-
+            if (gameGrid == null)
+            {
+                MessageBox.Show("There is no board to show you!");
+            }
+            else
+            {
+                gameMode = 2;
+                ShowBoard();
+            }
         }
 
         private void GameBoard_Click(object sender, MouseEventArgs e)
@@ -308,8 +355,8 @@ namespace fantasticOctoWaddle
                         }
                     }
                     ResumeLayout();
-                    MessageBox.Show("YOU WIN! \nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
-                    Player.PlayerScore = GameTimer.Elapsed.Seconds;
+                    Player.PlayerScore = GameTimer.Elapsed.Seconds + HintPenalty;
+                    MessageBox.Show("YOU WIN! \nTime Elapsed: " + Player.PlayerScore / 3600 + ":" + (Player.PlayerScore / 60) % 60 + ":" + Player.PlayerScore % 60);
 
                     // Write the player score to the data file and add to the scoreboard List<>
                     ScoreBrd.WriteScore(Player);
@@ -325,7 +372,7 @@ namespace fantasticOctoWaddle
                     //ScoreBrd.FormClosed += (o, e) => this.Close();
                     // shows the scoreboard
                     ScoreBrd.ShowDialog();
-                    ResetBoard();
+                    //ResetBoard();
                     break;
 
                 case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
@@ -368,18 +415,19 @@ namespace fantasticOctoWaddle
                         }
                     }
                     ResumeLayout();
-                    MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + GameTimer.Elapsed.ToString("mm\\:ss"));
+                    Player.PlayerScore = GameTimer.Elapsed.Seconds + HintPenalty;
+                    MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + Player.PlayerScore/3600 + ":"+(Player.PlayerScore/60)%60 + ":" + Player.PlayerScore%60);
 
                     // Populates top 5 and shows the scoreboard.
 
                     // calls populatetop5 method to give this game a chance to be in the top 5
-                    ScoreBrd.PopulateTop5(Player.PlayerLevel);
+                    //ScoreBrd.PopulateTop5(Player.PlayerLevel);
 
                     // Subscribing to the ScoreBrd close form event so this form closes too
                     // ScoreBrd.FormClosed += (o, e) => this.Close();
                     // shows the scoreboard
-                    ScoreBrd.ShowDialog();
-                    ResetBoard();
+                    //ScoreBrd.ShowDialog();
+                    //ResetBoard();
                     break;
             }
 
