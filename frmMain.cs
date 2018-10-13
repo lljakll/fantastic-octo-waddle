@@ -152,7 +152,8 @@ namespace fantasticOctoWaddle
 
         private void HelpToolStripMenuAbout_Click(object sender, EventArgs e)
         {
-
+            FrmAbout about = new FrmAbout();
+            about.ShowDialog();
         }
 
         private void HelpToolStripHintShowACell_Click(object sender, EventArgs e)
@@ -243,7 +244,7 @@ namespace fantasticOctoWaddle
                         // if it is not flagged, flag it, add the image, mark the visited flag,
                         // and check the win condition.
                         cell.BackgroundImageLayout = ImageLayout.Stretch;
-                        cell.BackgroundImage = fantasticOctoWaddle.Resources.mineSweeperFlag;
+                        cell.BackgroundImage = fantasticOctoWaddle.Resource.mineSweeperFlag;
                         cell.IsFlagged = true;
                     }
                     // checking win condition so if the last unvisited cell is flagged, the game doesnt stall.
@@ -339,7 +340,7 @@ namespace fantasticOctoWaddle
                             if (gameGrid.board[row, col].IsLive)
                             {
                                 gameGrid.board[row, col].BackgroundImageLayout = ImageLayout.Stretch;
-                                gameGrid.board[row, col].BackgroundImage = fantasticOctoWaddle.Resources.mineSweeperFlag;
+                                gameGrid.board[row, col].BackgroundImage = fantasticOctoWaddle.Resource.mineSweeperFlag;
                             }
                         }
                     }
@@ -401,7 +402,7 @@ namespace fantasticOctoWaddle
                             if (gameGrid.board[row, col].IsLive)
                             {
                                 gameGrid.board[row, col].BackgroundImageLayout = ImageLayout.Stretch;
-                                gameGrid.board[row, col].BackgroundImage = fantasticOctoWaddle.Resources.bomb;
+                                gameGrid.board[row, col].BackgroundImage = fantasticOctoWaddle.Resource.bomb;
                             }
                         }
                     }
