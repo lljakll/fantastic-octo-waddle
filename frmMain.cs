@@ -191,9 +191,8 @@ namespace fantasticOctoWaddle
                             if (cell.NumLiveNeighbors == 0)   // if there are no live neighbors,
                                 Cascade(cell.Row, cell.Col);  // send this cell's row and col to the cascade method
                         }
-                    CheckWinCondition();
+                    //CheckWinCondition();
                     }
-
                     ShowBoard();
                     break;
                 case MouseButtons.Right:
