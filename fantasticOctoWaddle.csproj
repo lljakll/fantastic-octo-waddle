@@ -107,6 +107,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="LICENSE" />
+    <None Include="README.md" />
     <None Include="res\About.png" />
     <Content Include="res\bomb.png" />
     <Content Include="res\bomb_AQB_icon.ico" />
