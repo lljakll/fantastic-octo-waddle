@@ -133,26 +133,17 @@ namespace fantasticOctoWaddle
                     hours = i.PlayerScore / 3600;
                 }
 
+                // Create a string with the score
                 scoreString = hours.ToString() + "h " + minutes.ToString() + "m " + seconds.ToString() + "s";
-
-                // Populate the listviewwitem with names and scores
-                //ListViewItem item = new ListViewItem(new[] { i.PlayerName, scoreString });
-                // Populate the List view with ListViewItems
-                //LVTop5Scores.Items.Add(item);
 
                 // Datagridview population
                 string[] row = new string[] { i.PlayerName, scoreString };
                 DGTop5Scores.Rows.Add(row);
-                
-
-                // Autoresize the columns
-                //this.LVTop5Scores.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-
             }
 
         }
         
-        // Close button.  Will close the gameBoard too.
+        // Close button.
         private void ButtonClose_Click(object sender, EventArgs e)
         {
             this.Close();

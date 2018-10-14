@@ -16,6 +16,7 @@ namespace fantasticOctoWaddle
             InitializeComponent();
         }
 
+        // Close on click.
         private void BtnInstructionsClose_Click(object sender, EventArgs e)
         {
             this.Close();

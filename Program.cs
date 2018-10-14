@@ -1,7 +1,7 @@
 ﻿// Jackie A. Adair
 // CST-227 Enterprise Application Development II
-// Topic 5 Milestone 6 
-// git clone -b Milestone-6 https://github.com/lljakll/fantastic-octo-waddle.git
+// Topic 7 Milestone 7 
+// git clone -b Milestone-7 https://github.com/lljakll/fantastic-octo-waddle.git
 // This is my own work
 
 
@@ -24,7 +24,7 @@ namespace fantasticOctoWaddle
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Call the LevelSelect Form to start the application
+            // Call the Main Form to start the application
             Application.Run(new frmMain());
         }
     }
