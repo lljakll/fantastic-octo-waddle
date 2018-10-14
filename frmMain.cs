@@ -189,8 +189,12 @@ namespace fantasticOctoWaddle
         private void HelpToolStripHintShowTheBoard_Click(object sender, EventArgs e)
         {
             // sets the game mode and show the board.
-            gameMode = 2;
-            ShowBoard();
+            DialogResult dialogResult = MessageBox.Show("Are you sure.  This will end the game.", "Confirm", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                gameMode = 2;
+                ShowBoard();
+            }
         }
 
         // Game Cell Click Event Method
