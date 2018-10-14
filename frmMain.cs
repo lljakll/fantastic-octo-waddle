@@ -184,6 +184,11 @@ namespace fantasticOctoWaddle
                         // if cell is not live, update has been visited, 
                         // check win condition, then set gameMode to 1, and update display
                         cell.HasBeenVisited = true;
+                        if (cell.IsFlagged)
+                        {
+                            cell.BackgroundImage = null;
+                            cell.IsFlagged = false;
+                        }
                         CheckWinCondition();
 
                         if (gameMode == 1)
