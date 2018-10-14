@@ -42,7 +42,6 @@
             this.HelpToolStripMenuHowToPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.hintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripHintShowTheBoard = new System.Windows.Forms.ToolStripMenuItem();
-            this.HelpToolStripHintShowACell = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.PanelGamePanel = new System.Windows.Forms.Panel();
             this.MenuStripMain.SuspendLayout();
@@ -57,7 +56,7 @@
             this.HelpToolStripMenu});
             this.MenuStripMain.Location = new System.Drawing.Point(0, 0);
             this.MenuStripMain.Name = "MenuStripMain";
-            this.MenuStripMain.Size = new System.Drawing.Size(841, 49);
+            this.MenuStripMain.Size = new System.Drawing.Size(292, 52);
             this.MenuStripMain.TabIndex = 0;
             this.MenuStripMain.Text = "menuStrip1";
             // 
@@ -67,7 +66,7 @@
             this.FileToolStripNewGame,
             this.FileToolStripExit});
             this.FileToolStripMenu.Name = "FileToolStripMenu";
-            this.FileToolStripMenu.Size = new System.Drawing.Size(75, 45);
+            this.FileToolStripMenu.Size = new System.Drawing.Size(75, 48);
             this.FileToolStripMenu.Text = "File";
             // 
             // FileToolStripNewGame
@@ -89,7 +88,7 @@
             this.ViewToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ViewToolStripScoreboard});
             this.ViewToolStripMenu.Name = "ViewToolStripMenu";
-            this.ViewToolStripMenu.Size = new System.Drawing.Size(94, 45);
+            this.ViewToolStripMenu.Size = new System.Drawing.Size(94, 48);
             this.ViewToolStripMenu.Text = "View";
             // 
             // ViewToolStripScoreboard
@@ -130,45 +129,36 @@
             this.hintToolStripMenuItem,
             this.HelpToolStripMenuAbout});
             this.HelpToolStripMenu.Name = "HelpToolStripMenu";
-            this.HelpToolStripMenu.Size = new System.Drawing.Size(92, 45);
+            this.HelpToolStripMenu.Size = new System.Drawing.Size(92, 48);
             this.HelpToolStripMenu.Text = "Help";
             // 
             // HelpToolStripMenuHowToPlay
             // 
             this.HelpToolStripMenuHowToPlay.Name = "HelpToolStripMenuHowToPlay";
-            this.HelpToolStripMenuHowToPlay.Size = new System.Drawing.Size(294, 46);
+            this.HelpToolStripMenuHowToPlay.Size = new System.Drawing.Size(396, 46);
             this.HelpToolStripMenuHowToPlay.Text = "How To Play";
             this.HelpToolStripMenuHowToPlay.Click += new System.EventHandler(this.HelpToolStripMenuHowToPlay_Click);
             // 
             // hintToolStripMenuItem
             // 
             this.hintToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.HelpToolStripHintShowTheBoard,
-            this.HelpToolStripHintShowACell});
+            this.HelpToolStripHintShowTheBoard});
             this.hintToolStripMenuItem.Name = "hintToolStripMenuItem";
-            this.hintToolStripMenuItem.Size = new System.Drawing.Size(294, 46);
+            this.hintToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
             this.hintToolStripMenuItem.Text = "Hint";
             // 
             // HelpToolStripHintShowTheBoard
             // 
-            this.HelpToolStripHintShowTheBoard.Name = "HelpToolStripHintShowTheBoard";
-            this.HelpToolStripHintShowTheBoard.Size = new System.Drawing.Size(348, 46);
-            this.HelpToolStripHintShowTheBoard.Text = "Show The Board";
             this.HelpToolStripHintShowTheBoard.Enabled = false;
+            this.HelpToolStripHintShowTheBoard.Name = "HelpToolStripHintShowTheBoard";
+            this.HelpToolStripHintShowTheBoard.Size = new System.Drawing.Size(396, 46);
+            this.HelpToolStripHintShowTheBoard.Text = "Show The Board";
             this.HelpToolStripHintShowTheBoard.Click += new System.EventHandler(this.HelpToolStripHintShowTheBoard_Click);
-            // 
-            // HelpToolStripHintShowACell
-            // 
-            this.HelpToolStripHintShowACell.Name = "HelpToolStripHintShowACell";
-            this.HelpToolStripHintShowACell.Size = new System.Drawing.Size(348, 46);
-            this.HelpToolStripHintShowACell.Text = "Show A Cell";
-            this.HelpToolStripHintShowACell.Enabled = false;
-            this.HelpToolStripHintShowACell.Click += new System.EventHandler(this.HelpToolStripHintShowACell_Click);
             // 
             // HelpToolStripMenuAbout
             // 
             this.HelpToolStripMenuAbout.Name = "HelpToolStripMenuAbout";
-            this.HelpToolStripMenuAbout.Size = new System.Drawing.Size(294, 46);
+            this.HelpToolStripMenuAbout.Size = new System.Drawing.Size(396, 46);
             this.HelpToolStripMenuAbout.Text = "About";
             this.HelpToolStripMenuAbout.Click += new System.EventHandler(this.HelpToolStripMenuAbout_Click);
             // 
@@ -188,6 +178,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(292, 212);
             this.Controls.Add(this.PanelGamePanel);
             this.Controls.Add(this.MenuStripMain);
             this.DoubleBuffered = true;
@@ -220,7 +211,6 @@
         private System.Windows.Forms.ToolStripMenuItem ViewToolStripScoreboardModerate;
         private System.Windows.Forms.ToolStripMenuItem ViewToolStripScoreboardHard;
         private System.Windows.Forms.ToolStripMenuItem hintToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem HelpToolStripHintShowACell;
         private System.Windows.Forms.ToolStripMenuItem HelpToolStripHintShowTheBoard;
         private System.Windows.Forms.Panel PanelGamePanel;
     }
