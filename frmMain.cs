@@ -13,11 +13,11 @@ namespace fantasticOctoWaddle
 {
     public partial class frmMain : Form
     {
+        // Properties
         public int Difficulty { get; set; }
         public string PlayerName { get; set; }
         public Size FormSize { get; set; }
         public int HintPenalty { get; set; }
-
         public int BoardSize { get; set; }
         private Stopwatch GameTimer = new Stopwatch();
         private int gameMode = 1;
@@ -25,8 +25,7 @@ namespace fantasticOctoWaddle
         PlayerStats Player;
         Scores ScoreBrd;
 
-
-
+        // Constructor.  Sets form size as well.
         public frmMain()
         {
             InitializeComponent();
@@ -35,8 +34,12 @@ namespace fantasticOctoWaddle
 
         }
 
+        // MENU STRIP CLICK HANDLER METHODS
+        // FILE MENU
+        // New Game
         private void FileToolStripMenuNewGame_Click(object sender, EventArgs e)
         {
+            // Calls LevelSelect and expects a return value.
             using (var form = new LevelSelect())
             {
                 var result = form.ShowDialog();
@@ -49,21 +52,25 @@ namespace fantasticOctoWaddle
                     // Initialize the ScoreBoard Object
                     ScoreBrd = new Scores();
 
-                    // Call method that reads scores into collection.  Might be useful in future
-                    // revisions, but the assignment implicitly says to load them at the beginning
+                    // Call method that reads scores into collection.  
                     ScoreBrd.ReadScoresToCollection();
 
-                    // Instantiate the PlayerStats object for this game.  The score will be updated at win condition
+                    // Instantiate the PlayerStats object for this game.  
+                    // The score will be updated at win condition
                     Player = new PlayerStats();
                     Player.PlayerName = PlayerName;
                     Player.PlayerLevel = Difficulty;
                     HintPenalty = 0;
 
+                    // Enable the Show Board option under the help menu
+                    // now that there is a board to sho.
                     this.HelpToolStripHintShowTheBoard.Enabled = true;
 
                     double percentActive = 0;
 
                     // Changed difficulty to board size and % active.
+                    // All 3 casees are as follows: Reset the board, set the size and percentActive,
+                    // resize the window, then center the it.
                     switch (Difficulty)
                     {
                         case 1:
@@ -71,21 +78,27 @@ namespace fantasticOctoWaddle
                             BoardSize = 10;
                             percentActive = .10;
                             this.ClientSize = new System.Drawing.Size(255, 280);
-                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
+                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) 
+                                - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) 
+                                - (this.Size.Height / 2));
                             break;
                         case 2:
                             ResetBoard();
                             BoardSize = 15;
                             percentActive = .25;
                             this.ClientSize = new System.Drawing.Size(380, 405);
-                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
+                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) 
+                                - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) 
+                                - (this.Size.Height / 2));
                             break;
                         case 3:
                             ResetBoard();
                             BoardSize = 20;
                             percentActive = .4;
                             this.ClientSize = new System.Drawing.Size(505, 530);
-                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
+                            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) 
+                                - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) 
+                                - (this.Size.Height / 2));
                             break;
                     }
 
@@ -95,9 +108,13 @@ namespace fantasticOctoWaddle
                     gameGrid.PopulateNeighborValues();
                     GameTimer.Start();
 
-                    // Iterate through the array
+                    // use Double Buffer and suspend the layout while the grid is being drawn
+                    // helps with lag on Hard board.
                     DoubleBuffered = true;
                     SuspendLayout();
+
+                    // Iterate through the array
+
                     for (int row = 0; row < BoardSize; row++)
                     {
                         for (int col = 0; col < BoardSize; col++)
@@ -110,58 +127,73 @@ namespace fantasticOctoWaddle
                             gameGrid.board[row, col].MouseUp += GameBoard_Click;
                         }
                     }
+                    // Resume the layout after grid is drawn
                     ResumeLayout();
                 }
             }
         }
 
+        // Exit
         private void FileToolStripExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // VIEW MENU
+        // Show the Easy Scoreboard
         private void ViewToolStripScoreboardEasy_Click(object sender, EventArgs e)
         {
+            // Display the scoreboard with easy setting
             Scores dispScore = new Scores();
             dispScore.ReadScoresToCollection();
             dispScore.PopulateTop5(1);
             dispScore.ShowDialog();
         }
 
+        // Show the Moderate Scoreboard
         private void ViewToolStripScoreboardModerate_Click(object sender, EventArgs e)
         {
+            // Display the scoreboard with moderate setting
             Scores dispScore = new Scores();
             dispScore.ReadScoresToCollection();
             dispScore.PopulateTop5(2);
             dispScore.ShowDialog();
         }
 
+        // Show the Hard Scoreboard
         private void ViewToolStripScoreboardHard_Click(object sender, EventArgs e)
         {
+            // Display the scoreboard with hard setting
             Scores dispScore = new Scores();
             dispScore.ReadScoresToCollection();
             dispScore.PopulateTop5(3);
             dispScore.ShowDialog();
         }
 
+        // HELP MENU
+        // How To Play
         private void HelpToolStripMenuHowToPlay_Click(object sender, EventArgs e)
         {
             Instructions instructions = new Instructions();
             instructions.ShowDialog();
         }
 
+        // About 
         private void HelpToolStripMenuAbout_Click(object sender, EventArgs e)
         {
             FrmAbout about = new FrmAbout();
             about.ShowDialog();
         }
 
+        // Show the Board
         private void HelpToolStripHintShowTheBoard_Click(object sender, EventArgs e)
         {
+            // sets the game mode and show the board.
             gameMode = 2;
             ShowBoard();
         }
 
+        // Game Cell Click Event Method
         private void GameBoard_Click(object sender, MouseEventArgs e)
         {
 
@@ -170,8 +202,10 @@ namespace fantasticOctoWaddle
 
             switch (e.Button)
             {
+                // If Left Mouse Button Click
                 case MouseButtons.Left:
-                    // unsubscribe from Left click event
+
+                    // unsubscribe from Left click event.  Doesnt matter what the result.
                     cell.MouseUp -= GameBoard_Click;
 
                     // Code for checking isLive and responding to it appropriatley;
@@ -183,7 +217,9 @@ namespace fantasticOctoWaddle
                     else
                     {
                         // if cell is not live, update has been visited, 
-                        // check win condition, then set gameMode to 1, and update display
+                        // check if flagged, unflag if it is and clear icon,
+                        // check win condition, then set gameMode to 1, cascade
+                        // if required.
                         cell.HasBeenVisited = true;
                         if (cell.IsFlagged)
                         {
@@ -194,19 +230,23 @@ namespace fantasticOctoWaddle
 
                         if (gameMode == 1)
                         {
-                            if (cell.NumLiveNeighbors == 0)   // if there are no live neighbors,
-                                Cascade(cell.Row, cell.Col);  // send this cell's row and col to the cascade method
+                            // check for cascade reqmt and run
+                            if (cell.NumLiveNeighbors == 0)
+                                Cascade(cell.Row, cell.Col);
                         }
-                    //CheckWinCondition();
                     }
+                    // update the board
                     ShowBoard();
                     break;
+
+                // If Right Mouse button click
                 case MouseButtons.Right:
 
                     // code for flagging the unchecked cell and marking it as flagged
                     if (cell.IsFlagged)
                     {
-                        // if it is flagged, unflag it, clear the image, mark cell as not visited, resubscribe to mouse click event
+                        // if it is flagged, unflag it, clear the image, mark 
+                        // cell as not visited, resubscribe to mouse click event
                         cell.BackgroundImage = null;
                         cell.IsFlagged = false;
                     }
@@ -234,8 +274,9 @@ namespace fantasticOctoWaddle
             {
                 for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                 {
-                    // Checks all non live cells for visitation
-                    if (gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].HasBeenVisited == false || gameGrid.board[row,col].IsFlagged == true && gameGrid.board[row,col].IsFlagged == false)
+                    // Checks all non live cells for visitation or all nonlive are visited or flagged
+                    if (gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].HasBeenVisited == false || 
+                        gameGrid.board[row,col].IsFlagged == false && gameGrid.board[row,col].IsFlagged == false)
                     {
                         gameMode = 1;
                         return;
@@ -249,8 +290,10 @@ namespace fantasticOctoWaddle
         public void Cascade(int row, int col)
         {
             gameGrid.board[row, col].HasBeenVisited = true;
+
             // unsubscribe from Left click event
             gameGrid.board[row, col].MouseUp -= GameBoard_Click;
+
             // check for live neighbors.  If none, iterate through the neighbors to do the following:
             if (gameGrid.board[row, col].NumLiveNeighbors == 0)
             {
@@ -285,8 +328,13 @@ namespace fantasticOctoWaddle
 
         public void ResetBoard()
         {
+            // Reset window size
             this.ClientSize = new System.Drawing.Size(350, 375);
-            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - (this.Size.Height / 2));
+            // Reset window position
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - 
+                (this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Size.Height / 2) - 
+                (this.Size.Height / 2));
+            // clear cells from board
             PanelGamePanel.Controls.Clear();
         }
 
@@ -297,17 +345,21 @@ namespace fantasticOctoWaddle
             {
                 case 0: // WinRAR.  Stop the timer, and display all mines with flags.  give winning message
                     StopTimer();
+
+                    // double buffered and suspend layout for population of board lag
                     DoubleBuffered = true;
                     SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
+                            // add cells
                             PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
 
                             // Unsubscribe from the GameBoard_Click event since you won.
                             gameGrid.board[row, col].MouseUp -= GameBoard_Click;
 
+                            // show bombs
                             if (gameGrid.board[row, col].IsLive)
                             {
                                 gameGrid.board[row, col].BackgroundImageLayout = ImageLayout.Stretch;
@@ -315,10 +367,17 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    // resume layout now that board is drawn
                     ResumeLayout();
+
+                    // deactivate the show board menu item
                     this.HelpToolStripHintShowTheBoard.Enabled = false;
-                    Player.PlayerScore = GameTimer.Elapsed.Seconds + HintPenalty;
-                    MessageBox.Show("YOU WIN! \nTime Elapsed: " + Player.PlayerScore / 3600 + ":" + (Player.PlayerScore / 60) % 60 + ":" + Player.PlayerScore % 60);
+
+                    // assign player score.
+                    Player.PlayerScore = GameTimer.Elapsed.Seconds;
+
+                    // show win message
+                    MessageBox.Show("YOU WIN! \nTime Elapsed: " + GameTimer.Elapsed.ToString("hh\\:mm\\:ss"));
 
                     // Write the player score to the data file and add to the scoreboard List<>
                     ScoreBrd.WriteScore(Player);
@@ -330,22 +389,25 @@ namespace fantasticOctoWaddle
                     // calls populatetop5 method to give this game a chance to be in the top 5
                     ScoreBrd.PopulateTop5(Player.PlayerLevel);
 
-                    // Subscribing to the ScoreBrd close form event so this form closes too
-                    //ScoreBrd.FormClosed += (o, e) => this.Close();
                     // shows the scoreboard
                     ScoreBrd.ShowDialog();
-                    //ResetBoard();
                     break;
 
-                case 1: //  Still Alive.  display the board again with proper values if the cells have been visited and arent flagged or 0 or live.
+                case 1: //  Still Alive.  display the board again with proper values if 
+                        // the cells have been visited and arent flagged or 0 or live.
+
+                    // double buffered and suspend layout for population of board lag
                     DoubleBuffered = true;
                     SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
+                            // redraw the board with updated cells
                             PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
-                            if (gameGrid.board[row, col].HasBeenVisited == true && gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].IsFlagged == false)
+                            if (gameGrid.board[row, col].HasBeenVisited == true 
+                                && gameGrid.board[row, col].IsLive == false 
+                                && gameGrid.board[row, col].IsFlagged == false)
                             {
                                 gameGrid.board[row, col].BackColor = System.Drawing.Color.AliceBlue;
                                 if (gameGrid.board[row, col].NumLiveNeighbors > 0)
@@ -353,17 +415,21 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    // resume layout now that board is drawn
                     ResumeLayout();
                     break;
 
                 case 2: // Dead.  stop timer. Display all live cells with bomb icon, give dead message and time.
                     StopTimer();
+                    
+                    // double buffered and suspend layout for population of board lag
                     DoubleBuffered = true;
                     SuspendLayout();
                     for (int row = 0; row < gameGrid.board.GetLength(0); row++)
                     {
                         for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                         {
+                            // redraw the board
                             PanelGamePanel.Controls.Add(gameGrid.board[row, col]);
 
                             // Unsubscribe from the GameBoard_Click event since you lost
@@ -376,21 +442,17 @@ namespace fantasticOctoWaddle
                             }
                         }
                     }
+                    // resume layout now that board is drawn
                     ResumeLayout();
+
+                    // disable show the board menu item
                     this.HelpToolStripHintShowTheBoard.Enabled = false;
-                    Player.PlayerScore = GameTimer.Elapsed.Seconds + HintPenalty;
-                    MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + Player.PlayerScore/3600 + ":"+(Player.PlayerScore/60)%60 + ":" + Player.PlayerScore%60);
 
-                    // Populates top 5 and shows the scoreboard.
+                    // assign player score.
+                    Player.PlayerScore = GameTimer.Elapsed.Seconds;
 
-                    // calls populatetop5 method to give this game a chance to be in the top 5
-                    //ScoreBrd.PopulateTop5(Player.PlayerLevel);
-
-                    // Subscribing to the ScoreBrd close form event so this form closes too
-                    // ScoreBrd.FormClosed += (o, e) => this.Close();
-                    // shows the scoreboard
-                    //ScoreBrd.ShowDialog();
-                    //ResetBoard();
+                    // Show the lose message.
+                    MessageBox.Show("BOOM!  YOU LOSE! \nTime Elapsed: " + GameTimer.Elapsed.ToString("hh\\:mm\\:ss"));
                     break;
             }
 
