@@ -274,9 +274,8 @@ namespace fantasticOctoWaddle
             {
                 for (int col = 0; col < gameGrid.board.GetLength(1); col++)
                 {
-                    // Checks all non live cells for visitation or all nonlive are visited or flagged
-                    if (gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].HasBeenVisited == false || 
-                        gameGrid.board[row,col].IsFlagged == false && gameGrid.board[row,col].IsFlagged == false)
+                    // Checks all non live cells for visitation or all live are flagged
+                    if (gameGrid.board[row, col].IsLive == false && gameGrid.board[row, col].HasBeenVisited == false)
                     {
                         gameMode = 1;
                         return;
