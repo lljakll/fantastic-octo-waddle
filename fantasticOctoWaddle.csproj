@@ -107,6 +107,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\About.png" />
     <Content Include="res\bomb.png" />
     <Content Include="res\bomb_AQB_icon.ico" />
     <Content Include="res\mainFormBkgrnd.png" />
