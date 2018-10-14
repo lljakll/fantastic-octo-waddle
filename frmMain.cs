@@ -146,7 +146,8 @@ namespace fantasticOctoWaddle
 
         private void HelpToolStripMenuHowToPlay_Click(object sender, EventArgs e)
         {
-            
+            Instructions instructions = new Instructions();
+            instructions.ShowDialog();
         }
 
         private void HelpToolStripMenuAbout_Click(object sender, EventArgs e)
